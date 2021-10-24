@@ -1,4 +1,4 @@
-package tp06;
+package graph;
 
 import java.util.ArrayList;
 
