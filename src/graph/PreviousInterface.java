@@ -1,4 +1,4 @@
-package tp06;
+package graph;
 
 public interface PreviousInterface {
 	public VertexInterface getPrevious(VertexInterface u);

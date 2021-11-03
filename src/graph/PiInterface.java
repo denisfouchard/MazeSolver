@@ -1,4 +1,4 @@
-package tp06;
+package graph;
 
 public interface PiInterface {
 	public float getDistance(VertexInterface u);

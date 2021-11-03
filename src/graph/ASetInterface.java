@@ -1,4 +1,4 @@
-package tp06;
+package graph;
 
 public interface ASetInterface {
 	public void addA(VertexInterface u); //Ajouter un élément à l'ensemble

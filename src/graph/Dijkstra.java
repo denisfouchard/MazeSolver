@@ -1,4 +1,4 @@
-package tp06;
+package graph;
 
 public class Dijkstra {
 	private PreviousInterface dijkstra(GraphInterface g, VertexInterface r, ASetInterface a, PiInterface pi, PreviousInterface previous) {
@@ -13,7 +13,7 @@ public class Dijkstra {
 		}
 		for (int j = 0; j < g.size(); j +=1) {
 			
-			for (VertexInterface y : pivot.getNeighbours() {
+			for (VertexInterface y : pivot.getNeighbours()) {
 				if (!a.isIn(y)) {
 					if (pi.getDistance(pivot) + g.getWeight(pivot, y) < pi.getDistance(y) ) {
 						pi.setDistance(y, pi.getDistance(pivot) + g.getWeight(pivot, y));
@@ -21,7 +21,7 @@ public class Dijkstra {
 					}
 				}
 			}
-			VertexInterface closest;
+			VertexInterface closest = null;
 			float d = Float.POSITIVE_INFINITY;
 			
 			for (VertexInterface y : pivot.getNeighbours()) {
