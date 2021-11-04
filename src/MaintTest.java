@@ -1,7 +1,10 @@
-package maze;
+
 
 import java.io.IOException;
 import java.util.Arrays;
+
+import maze.Maze;
+import maze.MazeReadingException;
 
 public class MaintTest {
 

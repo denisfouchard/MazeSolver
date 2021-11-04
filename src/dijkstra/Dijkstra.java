@@ -1,4 +1,4 @@
-package graph;
+package dijkstra;
 
 public class Dijkstra {
 	private PreviousInterface dijkstra(GraphInterface g, VertexInterface r, ASetInterface a, PiInterface pi, PreviousInterface previous) {
@@ -6,7 +6,7 @@ public class Dijkstra {
 		a.addA(r);
 		VertexInterface pivot = r;
 		pi.setDistance(r, 0);
-		for (VertexInterface x : g.getVertices()) {
+		for (VertexInterface x : g.getAllVertices()) {
 			if (x != r) {
 				pi.setDistance(x, Float.POSITIVE_INFINITY);
 			}

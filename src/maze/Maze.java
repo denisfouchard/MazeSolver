@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class Maze {
+import dijkstra.GraphInterface;
+import dijkstra.VertexInterface;
+
+public class Maze implements GraphInterface {
 	public MBox[][] maze;
 	private DBox departure;
 	private ABox arrival;
@@ -115,6 +118,30 @@ public class Maze {
 
 	public void setArrival(ABox arrival) {
 		this.arrival = arrival;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<VertexInterface> getAllVertices() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<VertexInterface> getSuccessors(VertexInterface vertex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getWeight(VertexInterface u, VertexInterface v) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

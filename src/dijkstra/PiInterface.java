@@ -1,4 +1,4 @@
-package graph;
+package dijkstra;
 
 public interface PiInterface {
 	public float getDistance(VertexInterface u);
