@@ -1,5 +1,7 @@
 package maze;
 
+import java.util.ArrayList;
+
 import dijkstra.VertexInterface;
 
 public abstract class MBox implements VertexInterface {
@@ -27,5 +29,31 @@ public abstract class MBox implements VertexInterface {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+
+
+	@Override
+	public void addNeighbour() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public boolean hasNeighbours() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public ArrayList<VertexInterface> getNeighbours() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 }

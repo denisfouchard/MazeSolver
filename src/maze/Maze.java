@@ -120,11 +120,7 @@ public class Maze implements GraphInterface {
 		this.arrival = arrival;
 	}
 
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public ArrayList<VertexInterface> getAllVertices() {
