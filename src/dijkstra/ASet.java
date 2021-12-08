@@ -3,7 +3,13 @@ import java.util.HashSet;
 
 public class ASet implements ASetInterface{
 	
+	
+	
 	private HashSet<VertexInterface> A; 
+	
+	public ASet(GraphInterface g) {
+		A = new HashSet<VertexInterface>(g.size());
+		};
 
 	@Override
 	public void addA(VertexInterface u) {
@@ -18,8 +24,8 @@ public class ASet implements ASetInterface{
 
 	@Override
 	public boolean isIn(VertexInterface u) {
-		A.contains(u);
-		return false;
+		return A.contains(u);
+		
 	}
 
 }

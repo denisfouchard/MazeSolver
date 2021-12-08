@@ -23,4 +23,9 @@ public class Previous implements PreviousInterface {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return P.toString();
+	}
+	
 }

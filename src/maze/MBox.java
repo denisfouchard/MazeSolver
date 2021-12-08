@@ -32,27 +32,8 @@ public abstract class MBox implements VertexInterface {
 
 
 
-	@Override
-	public void addNeighbour() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
-
-
-	@Override
-	public boolean hasNeighbours() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-	@Override
-	public ArrayList<VertexInterface> getNeighbours() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 	

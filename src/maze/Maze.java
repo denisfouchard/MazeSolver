@@ -15,6 +15,11 @@ public class Maze implements GraphInterface {
 	private DBox departure;
 	private ABox arrival;
 	private MBox[] boxes;
+	private int size;
+	
+	public Maze() {
+		
+	}
 	
 	public Maze(int i, int j) {
 		maze = new MBox[i][j];
@@ -46,6 +51,9 @@ public class Maze implements GraphInterface {
 		}
 		int n = lines.size();	
 		int m = lines.get(0).length();
+		
+		size = n*m;
+		
 		maze = new MBox[n][m];
 		char Box;
 		String currentLine;
@@ -88,6 +96,7 @@ public class Maze implements GraphInterface {
 				e.getMessage();
 			}
 		}
+		buff.close();
 	}
 	
 	public final void saveToTextFile(String fileName) throws FileNotFoundException {
@@ -124,21 +133,58 @@ public class Maze implements GraphInterface {
 
 	@Override
 	public ArrayList<VertexInterface> getAllVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		int n = maze.length;
+		int m = maze[0].length;
+		ArrayList<VertexInterface> allVertices = new ArrayList<>();
+		for (int i = 0; i < n; i ++) {
+			for (int j = 0; j <m; j ++) {
+				allVertices.add(maze[i][j]);
+			}
+		}
+		return allVertices;
 	}
 
 	@Override
 	public ArrayList<VertexInterface> getSuccessors(VertexInterface vertex) {
-		// TODO Auto-generated method stub
-		return null;
+		MBox v = (MBox)vertex;
+		int n = maze.length;
+		int m = maze[0].length;
+		int x = v.getX();
+		int y = v.getY();
+		ArrayList<VertexInterface> successors = new ArrayList<>();
+		
+		if (x > 1) {
+			if (maze[x-1][y].type != 'W') {
+				successors.add(maze[x-1][y]);
+			}
+		}
+		if (x < n-1) {
+			if (maze[x+1][y].type != 'W') {
+				successors.add(maze[x+1][y]);
+			}
+		}
+		if (y > 1) {
+			if (maze[x][y-1].type != 'W') {
+				successors.add(maze[x][y-1]);
+			}
+		}
+		
+		if (y < m-1) {
+			if (maze[x][y+1].type != 'W') {
+				successors.add(maze[x][y+1]);
+			}	
+		}
+		return successors;
 	}
 
 	@Override
-	public int getWeight(VertexInterface u, VertexInterface v) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int size() {
+		return size;
 	}
+
+	
+	
+	
 	
 	
 }
