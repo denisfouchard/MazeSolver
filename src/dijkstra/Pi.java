@@ -1,7 +1,9 @@
 package dijkstra;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
-import java.lang.Float;
+
+import maze.MBox;
 
 public class Pi implements PiInterface {
 	private  Hashtable<VertexInterface, Integer> pi = new Hashtable<VertexInterface, Integer>();
@@ -30,7 +32,13 @@ public class Pi implements PiInterface {
 	
 	@Override
 	public String toString() {
-		return pi.toString();
+		String res = "";
+		Enumeration<VertexInterface> distances = pi.keys();
+		while (distances.hasMoreElements()) {
+			MBox u = (MBox)distances.nextElement();
+			res = res + "[" + u.getX() + ", " + u.getY() + "] : " + pi.get(u) + " ";
+		}
+		return res;
 	}
 	
 }

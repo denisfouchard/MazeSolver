@@ -1,13 +1,12 @@
 package maze;
 
-import java.util.ArrayList;
 
 import dijkstra.VertexInterface;
 
 public abstract class MBox implements VertexInterface {
 	private int x;
 	private int y;
-	public char type;
+	private char type;
 	
 	public MBox(int x0, int y0, char t) {
 		x = x0;
@@ -29,12 +28,17 @@ public abstract class MBox implements VertexInterface {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-
+	
+	public char getType() {
+		return this.type;
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + this.getX() + ", " + this.getY() + "]";
+	}
 
 	
 
-	
-	
 	
 }

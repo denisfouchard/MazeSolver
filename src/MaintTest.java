@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.Arrays;
 import dijkstra.ASet;
 import dijkstra.ASetInterface;
 import dijkstra.Pi;
@@ -9,8 +8,6 @@ import dijkstra.Previous;
 import dijkstra.VertexInterface;
 import dijkstra.Dijkstra;
 import dijkstra.GraphInterface;
-import maze.ABox;
-import maze.DBox;
 import maze.Maze;
 import maze.MazeReadingException;
 
@@ -25,13 +22,26 @@ public class MaintTest {
 		// System.out.println(Arrays.deepToString(m.maze));
 		//m.saveToTextFile("data/labyrinthe2.txt");
 		ASetInterface a = new ASet(g);
-		Previous prev = new Previous(g);
-		Pi pi = new Pi(g);
+		Previous prev = new Previous(m);
+		Pi pi = new Pi(m);
 		prev = (Previous) Dijkstra.dijkstra(g, dep, a, pi, prev);
 		
-		System.out.println(pi.toString());
+		//System.out.println(pi.toString());
 		
-	
+		//System.out.println(prev.toString());
+		
+//		String res = "";
+//		
+//		VertexInterface r = arr;
+//		while (r.getType() != 'D') {
+//			res = res + r.toString();
+//			r = prev.getPrevious(r);
+//			System.out.println(r.toString());
+//		}
+		
+		//System.out.print(res);
+		
+		
 		
 		
 	}

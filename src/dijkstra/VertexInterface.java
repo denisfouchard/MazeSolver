@@ -1,10 +1,12 @@
 package dijkstra;
 
-import java.util.ArrayList;
 
 public interface VertexInterface {
-//	public void addNeighbour();
-//	public boolean hasNeighbours();
-//	public ArrayList<VertexInterface> getNeighbours();
+
+	public char getType();
+	public int getX();
+	public void setX(int x);
+	public int getY();
+	public void setY(int y);
 	
 }

@@ -2,7 +2,12 @@ package maze;
 
 public class MazeReadingException extends Exception{
 	
-	private String name;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
 	
 	public MazeReadingException(String fileName, int lineNumber, String errorMessage) {
 		

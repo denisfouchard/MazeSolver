@@ -10,7 +10,7 @@ public class Dijkstra {
 				pi.setDistance(x, Integer.MAX_VALUE);
 			}
 		}
-		int j = 0;
+		
 		while (pivot !=null) { //On teste tant que A n'est pas totalement rempli
 			
 			//System.out.println(g.getSuccessors(pivot).toString());
@@ -32,7 +32,7 @@ public class Dijkstra {
 			
 			//On cherche le voisin le plus proche du pivot actuel (peut être intégré à la première boucle)
 			
-			for (VertexInterface y : g.getSuccessors(pivot)) {
+			for (VertexInterface y : g.getAllVertices()) {
 				if (!a.isIn(y)) {
 					if (pi.getDistance(y) < d) {
 						d = pi.getDistance(y);
@@ -41,8 +41,11 @@ public class Dijkstra {
 				}
 			}
 			pivot = closest;
-			a.addA(pivot);	
-			j += 1;
+			a.addA(pivot);
+			if (pivot != null) {
+				
+			//System.out.println(pivot.getType() + pivot.toString());
+			}
 		}
 		return previous;
 	}

@@ -68,26 +68,51 @@ public class Maze implements GraphInterface {
 				
 				for (int j = 0; j < m; j+=1) {
 					Box = currentLine.charAt(j);
-					boolean noMatch = true;
-					if (Character.compare(Box, 'A') ==0) {	
+//					boolean noMatch = true;
+					
+					
+//					if (Character.compare(Box, 'A') ==0) {	
+//						arrival = new ABox(i, j);
+//						maze[i][j] = arrival;
+//						noMatch = false;
+//					}
+//					if (Character.compare(Box, 'D') ==0) {
+//						departure = new DBox(i,j);
+//						maze[i][j] = departure;
+//						noMatch = false;
+//					}
+//					if (Character.compare(Box, 'E') ==0) {
+//						maze[i][j] = new EBox(i, j);
+//						noMatch = false;
+//					}
+//					if (Character.compare(Box, 'W') ==0) {
+//						maze[i][j] = new WBox(i, j);
+//						noMatch = false;
+//					} 
+//					if (noMatch) {
+//						throw new MazeReadingException(fileName, i, "NotATile");
+//					}
+					
+					switch(Box) {
+					case 'A':
 						arrival = new ABox(i, j);
 						maze[i][j] = arrival;
-						noMatch = false;
-					}
-					if (Character.compare(Box, 'D') ==0) {
+						break;
+						
+					case 'D':
 						departure = new DBox(i,j);
-						maze[i][j] = departure;
-						noMatch = false;
-					}
-					if (Character.compare(Box, 'E') ==0) {
+    					maze[i][j] = departure;
+						break;
+						
+					case 'E':
 						maze[i][j] = new EBox(i, j);
-						noMatch = false;
-					}
-					if (Character.compare(Box, 'W') ==0) {
+						break;
+						
+					case 'W':
 						maze[i][j] = new WBox(i, j);
-						noMatch = false;
-					} 
-					if (noMatch) {
+						break;
+						
+					default :
 						throw new MazeReadingException(fileName, i, "NotATile");
 					}
 				}
@@ -106,7 +131,7 @@ public class Maze implements GraphInterface {
 		for (int i = 0; i < n; i++) {
 			String row = "";
 			for (int j = 0; j < m; j++) {
-				row = row + maze[i][j].type;
+				row = row + maze[i][j].getType();
 			}
 			file.println(row);
 		}
@@ -146,31 +171,32 @@ public class Maze implements GraphInterface {
 
 	@Override
 	public ArrayList<VertexInterface> getSuccessors(VertexInterface vertex) {
-		MBox v = (MBox)vertex;
+		//MBox v = (MBox)vertex;
 		int n = maze.length;
 		int m = maze[0].length;
-		int x = v.getX();
-		int y = v.getY();
+		int x = vertex.getX();
+		int y = vertex.getY();
 		ArrayList<VertexInterface> successors = new ArrayList<>();
 		
+		
 		if (x > 1) {
-			if (maze[x-1][y].type != 'W') {
+			if (maze[x-1][y].getType() != 'W') {
 				successors.add(maze[x-1][y]);
 			}
 		}
 		if (x < n-1) {
-			if (maze[x+1][y].type != 'W') {
+			if (maze[x+1][y].getType() != 'W') {
 				successors.add(maze[x+1][y]);
 			}
 		}
 		if (y > 1) {
-			if (maze[x][y-1].type != 'W') {
+			if (maze[x][y-1].getType() != 'W') {
 				successors.add(maze[x][y-1]);
 			}
 		}
 		
 		if (y < m-1) {
-			if (maze[x][y+1].type != 'W') {
+			if (maze[x][y+1].getType() != 'W') {
 				successors.add(maze[x][y+1]);
 			}	
 		}
