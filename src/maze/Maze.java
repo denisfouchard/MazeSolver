@@ -16,6 +16,7 @@ public class Maze implements GraphInterface {
 	private ABox arrival;
 	private MBox[] boxes;
 	private int size;
+
 	
 	public Maze() {
 		
@@ -206,6 +207,14 @@ public class Maze implements GraphInterface {
 	@Override
 	public int size() {
 		return size;
+	}
+
+	public int getRows() {
+		return maze.length;
+	}
+
+	public int getCols() {
+		return maze[0].length;
 	}
 
 	
