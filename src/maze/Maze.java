@@ -16,7 +16,7 @@ public class Maze implements GraphInterface {
 	private ABox arrival;
 	private MBox[] boxes;
 	private int size;
-
+	private String fileName = null;
 	
 	public Maze() {
 		
@@ -47,6 +47,7 @@ public class Maze implements GraphInterface {
 		BufferedReader buff = new BufferedReader(new FileReader(fileName));
 		ArrayList<String> lines = new ArrayList<>();
 		String strCurrentLine;
+		this.fileName = fileName;
 		while ((strCurrentLine = buff.readLine()) != null) {
 			lines.add(strCurrentLine);
 		}
@@ -215,6 +216,10 @@ public class Maze implements GraphInterface {
 
 	public int getCols() {
 		return maze[0].length;
+	}
+	
+	public String getFileName() {
+		return fileName;
 	}
 
 	

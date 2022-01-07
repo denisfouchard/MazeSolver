@@ -1,45 +1,68 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import maze.Maze;
+import maze.MazeReadingException;
 
 public class DrawingApp extends JFrame{
 	
 	
-	public DrawingApp(Maze maze) {
+	private JPanel mainPanel;
+	private DrawingGrid drawingGrid;
+	
+	public DrawingApp(Maze maze) throws MazeReadingException {
 		super("Maze solver");
+		
+		drawingGrid = new DrawingGrid(maze);
+		
 		setupUI();
 		setupGrid(maze);
+		setupButton(maze);
 		pack();
 		setVisible(true);
 	}
 	
+	
 	public void setupUI() {
+		
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		this.add(mainPanel);
+		
 		final DrawingMenuBar drawingMenuBar;
-		setPreferredSize(new Dimension(600, 600));
+		
+		setPreferredSize(new Dimension(600, 650));
+		setResizable(false);
 		setJMenuBar(drawingMenuBar = new DrawingMenuBar(this));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setupButton();
 	}
 	
-	public void setupButton() {
-		final JButton compute = new JButton("Compute...");
-		compute.setBounds(50, 100, 95, 30);
-		this.add(compute);
+	public void setupButton(Maze maze) {
+		JPanel buttonPanel;
+		ComputeButton compute = new ComputeButton(drawingGrid, maze);
+		buttonPanel = new JPanel();
+		buttonPanel.add(compute, BorderLayout.SOUTH);
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		mainPanel.add(buttonPanel);
+		
+		
 	}
 	
-	public void setupGrid(Maze maze) {
-//		final int caseSize = 30;
-//		int rows = maze.getRows();
-//		int cols = maze.getCols();
-//		int width = cols * caseSize;
-//		int height = rows * caseZise();
-//		final DrawingGrid grid = new DrawingGrid(width, height, rows, cols);
-		final DrawingGrid grid = new DrawingGrid(500,500,10,10);
-		this.add(grid);
+	public void setupGrid(Maze maze) throws MazeReadingException {
+		
+		mainPanel.add(drawingGrid);
 	}
+	
+
+	
 }

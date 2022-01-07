@@ -31,17 +31,18 @@ public class MaintTest {
 		
 		//System.out.println(prev.toString());
 		
-		String res = "";
+//		String res = "";
+//		
+//		VertexInterface r = arr;
+//		while (r.getType() != 'D') {
+//			System.out.println(r.toString());
+//			res = res + r.toString();
+//			r = prev.getPrevious(r);
+//			
+//		}
+//		
+//		System.out.print(res);
 		
-		VertexInterface r = arr;
-		while (r.getType() != 'D') {
-			System.out.println(r.toString());
-			res = res + r.toString();
-			r = prev.getPrevious(r);
-			
-		}
-		
-		System.out.print(res);
 		
 		new DrawingApp(m);
 		
