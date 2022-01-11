@@ -120,7 +120,7 @@ public class Maze implements GraphInterface {
 				}
 
 			} catch (MazeReadingException e) {
-				e.getMessage();
+				e.errorWindow();
 			}
 		}
 		buff.close();

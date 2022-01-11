@@ -1,0 +1,6 @@
+/bin/
+.DS_Store
+.classpath
+.idea/
+.project
+*.log

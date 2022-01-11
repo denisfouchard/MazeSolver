@@ -20,6 +20,10 @@ import maze.MazeReadingException;
 
 public class DrawingGrid extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int rows;
 	private int cols;
 	private JButton[][] grid;
@@ -58,7 +62,7 @@ public class DrawingGrid extends JPanel{
 				switch(maze.maze[i][j].getType()) {
 				
 				case 'A':
-					caseButton = new JButton();
+					caseButton = new CaseButton(maze);
 					caseButton.setBackground(arrivalColor);
 					caseButton.setOpaque(true);
 					//caseButton.setBorderPainted(false);
@@ -68,7 +72,7 @@ public class DrawingGrid extends JPanel{
 					break;
 					
 				case 'D':
-					caseButton = new JButton();
+					caseButton = new CaseButton(maze);
 					caseButton.setBackground(departureColor);
 					caseButton.setOpaque(true);
 					//caseButton.setBorderPainted(false);
@@ -78,7 +82,7 @@ public class DrawingGrid extends JPanel{
 					break;
 				
 				case 'E':
-					caseButton = new JButton();
+					caseButton = new CaseButton(maze);
 					caseButton.setBackground(emptyColor);
 					caseButton.setOpaque(true);
 					//caseButton.setBorderPainted(false);
@@ -88,7 +92,7 @@ public class DrawingGrid extends JPanel{
 					break;
 			
 				case 'W':
-					caseButton = new JButton();
+					caseButton = new CaseButton(maze);
 					caseButton.setBackground(wallColor);
 					caseButton.setOpaque(true);
 					//caseButton.setBorderPainted(false);
@@ -132,9 +136,7 @@ public class DrawingGrid extends JPanel{
 			v = prev.getPrevious(v);
 			
 		}
-		
-		
-		
+
 	}
 
 }

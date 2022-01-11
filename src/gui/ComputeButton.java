@@ -22,6 +22,7 @@ public class ComputeButton extends JButton{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				grid.tracePath(maze);
 				
 			}
