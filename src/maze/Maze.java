@@ -17,6 +17,8 @@ public class Maze implements GraphInterface {
 	private MBox[] boxes;
 	private int size;
 	private String fileName = null;
+	private int rows;
+	private int cols;
 	
 	public Maze() {
 		
@@ -24,13 +26,41 @@ public class Maze implements GraphInterface {
 	
 	public Maze(int i, int j) {
 		maze = new MBox[i][j];
+		rows = i;
+		cols  = j;
+		
 	}
 	
 	public Maze(int i, int j, MBox[] list_boxes) {
+		
+		//Pas utile, à supprimer
+		
 		maze = new MBox[i][j];
+		rows = i;
+		cols  = j;
 		for (MBox box : boxes) {
 			maze[box.getX()][box.getY()] = box;
 		}
+	}
+	
+	
+	public void initEmptyMaze() {
+		
+		departure = new DBox(0, 0);
+		arrival = new ABox(rows-1, cols-1);
+		
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (i+j !=0) {
+					maze[i][j] = new EBox(i, j);
+				}
+			}
+		}
+		
+		maze[0][0] = departure;
+		maze[rows-1][cols-1] = arrival;
+	
+		
 	}
 	
 	public final void printFromTextFile(String fileName) throws IOException {
@@ -44,15 +74,22 @@ public class Maze implements GraphInterface {
 	}
 	
 	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException {
+		
 		BufferedReader buff = new BufferedReader(new FileReader(fileName));
-		ArrayList<String> lines = new ArrayList<>();
+		ArrayList<String> fileLines = new ArrayList<>();
 		String strCurrentLine;
 		this.fileName = fileName;
+		
+		
 		while ((strCurrentLine = buff.readLine()) != null) {
-			lines.add(strCurrentLine);
+			fileLines.add(strCurrentLine);
 		}
-		int n = lines.size();	
-		int m = lines.get(0).length();
+		
+		int n = fileLines.size();	
+		int m = fileLines.get(0).length();
+		
+		rows = n;
+		cols  = m;
 		
 		size = n*m;
 		
@@ -62,7 +99,7 @@ public class Maze implements GraphInterface {
 		
 		for (int i = 0; i < n; i+=1) {
 			try {
-				currentLine = lines.get(i);
+				currentLine = fileLines.get(i);
 				
 				if (currentLine.length() != m) {
 					throw new MazeReadingException(fileName, i, "NotAMaze");
@@ -70,30 +107,7 @@ public class Maze implements GraphInterface {
 				
 				for (int j = 0; j < m; j+=1) {
 					Box = currentLine.charAt(j);
-//					boolean noMatch = true;
 					
-					
-//					if (Character.compare(Box, 'A') ==0) {	
-//						arrival = new ABox(i, j);
-//						maze[i][j] = arrival;
-//						noMatch = false;
-//					}
-//					if (Character.compare(Box, 'D') ==0) {
-//						departure = new DBox(i,j);
-//						maze[i][j] = departure;
-//						noMatch = false;
-//					}
-//					if (Character.compare(Box, 'E') ==0) {
-//						maze[i][j] = new EBox(i, j);
-//						noMatch = false;
-//					}
-//					if (Character.compare(Box, 'W') ==0) {
-//						maze[i][j] = new WBox(i, j);
-//						noMatch = false;
-//					} 
-//					if (noMatch) {
-//						throw new MazeReadingException(fileName, i, "NotATile");
-//					}
 					
 					switch(Box) {
 					case 'A':
@@ -120,7 +134,8 @@ public class Maze implements GraphInterface {
 				}
 
 			} catch (MazeReadingException e) {
-				e.errorWindow();
+				// Affiche une fenêtre d'erreur avec le nom de la ligne
+				e.printStackTrace();
 			}
 		}
 		buff.close();
@@ -211,20 +226,15 @@ public class Maze implements GraphInterface {
 	}
 
 	public int getRows() {
-		return maze.length;
+		return rows;
 	}
 
 	public int getCols() {
-		return maze[0].length;
+		return cols;
 	}
 	
 	public String getFileName() {
 		return fileName;
 	}
 
-	
-	
-	
-	
-	
 }

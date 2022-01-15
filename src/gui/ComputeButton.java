@@ -11,8 +11,11 @@ import maze.Maze;
 public class ComputeButton extends JButton{
 	
 	
-	public ComputeButton(DrawingGrid grid, Maze maze) {
+	private DrawingApp app;
+
+	public ComputeButton(DrawingApp app) {
 		super("Compute...");
+		this.app = app;
 		// Bouton de calcul du plus court chemin
 		this.setBounds(50, 100, 95, 30);
 		
@@ -23,7 +26,7 @@ public class ComputeButton extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				grid.tracePath(maze);
+				app.computeButtonPressed();
 				
 			}
 			

@@ -27,7 +27,8 @@ public class MazeReadingException extends Exception{
 	
 	public void errorWindow() {
 		
-		new ErrorMessageWindow(fileName, lineNumber); 
+		new ErrorMessageWindow(fileName, lineNumber);
+		
 	}
 	
 	

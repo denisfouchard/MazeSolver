@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -26,20 +25,22 @@ public class DrawingGrid extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private int rows;
 	private int cols;
+	private Maze maze;
 	private JButton[][] grid;
 	
 	
-	public DrawingGrid(Maze maze) throws MazeReadingException {
+	public DrawingGrid(Maze maze) {
 		super();
 		this.rows = maze.getRows();
 		this.cols = maze.getCols();	
 		this.grid = new JButton[cols][rows];
-		setupGrid(maze);
+		this.maze = maze;
+		setupGrid();
 		
 		
 	}
 	
-	public void setupGrid(Maze maze) throws MazeReadingException {
+	public void setupGrid() {
 	
 		// Couleurs du labyrinthe
 		Color arrivalColor = Color.RED;
@@ -114,7 +115,7 @@ public class DrawingGrid extends JPanel{
 	//this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 }
 }
-	public void tracePath(Maze maze) {
+	public void tracePath() {
 		Color pathColor = Color.GREEN;
 		
 		GraphInterface g = (GraphInterface)maze;

@@ -1,27 +1,26 @@
 package gui;
 
-import java.io.IOException;
+
 
 import javax.swing.JMenu;
 
-import maze.MazeReadingException;
+
 
 public class FileMenu extends JMenu{
 	
-	private final QuitMenuItem quitMenuItem;
-	private final NewMenuItem newMenuItem;
-	private final OpenMenuItem openMenuItem;
-	private final SaveMenuItem saveMenuItem;
-	
-	public FileMenu(DrawingApp drawingApp) throws MazeReadingException, IOException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public FileMenu(DrawingApp drawingApp) {
 		super("File");
 		 // Ajouter des items
 		
 		
-		add(newMenuItem = new NewMenuItem(drawingApp));
-		add(openMenuItem = new OpenMenuItem(drawingApp));
-		add(saveMenuItem = new SaveMenuItem(drawingApp));
-		add(quitMenuItem = new QuitMenuItem(drawingApp));
+		add(new NewMenuItem(drawingApp));
+		add(new OpenMenuItem(drawingApp));
+		add(new SaveMenuItem(drawingApp));
+		add(new QuitMenuItem(drawingApp));
 		
 	}
 }

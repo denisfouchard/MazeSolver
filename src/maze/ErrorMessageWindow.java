@@ -1,8 +1,9 @@
 package maze;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,8 @@ public class ErrorMessageWindow extends JFrame {
 		setupOKButton();
 		pack();
 		setVisible(true);
+		toFront();
+		requestFocus();
 	}
 	
 	
@@ -33,12 +36,18 @@ public class ErrorMessageWindow extends JFrame {
 		
 		JTextField errorMessage = new JTextField();
 		
-		if (lineNumber >= 0) {
+		if (fileName != null) {
 		
-			errorMessage.setText("An error has occured at line " + lineNumber + " : " + fileName + " is not a correct Maze File." );
-		} else {
-			errorMessage.setText("An error has occured : " + fileName + " is not a correct Maze File." );
+			if (lineNumber >= 0) {
+				errorMessage.setText("An error has occured at line " + lineNumber + " : " + fileName + " is not a correct Maze File." );
+			} else {
+				errorMessage.setText("An error has occured : " + fileName + " is not a correct Maze File." );
+		} 
+			}else {
+				errorMessage.setText("An error has occured during file reading.");
 		}
+			
+		
 		
 		mainPanel.add(errorMessage);
 		
@@ -53,6 +62,17 @@ public class ErrorMessageWindow extends JFrame {
 		JPanel buttonPanel;
 		JButton okButton = new JButton("Ok");
 		buttonPanel = new JPanel();
+		
+		
+		okButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+        });
+		
+		
 		buttonPanel.add(okButton, BorderLayout.SOUTH);
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		mainPanel.add(buttonPanel);

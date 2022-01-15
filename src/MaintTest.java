@@ -9,6 +9,7 @@ import dijkstra.VertexInterface;
 import gui.DrawingApp;
 import dijkstra.Dijkstra;
 import dijkstra.GraphInterface;
+import maze.ErrorMessageWindow;
 import maze.Maze;
 import maze.MazeReadingException;
 
@@ -16,7 +17,11 @@ public class MaintTest {
 
 	public static void main(String[] args) throws IOException, MazeReadingException {
 		Maze m = new Maze();
-		m.initFromTextFile("data/labyrinthe.txt");
+		//m.initFromTextFile("data/labyrinthe.txt");
+		
+		
+		m.initFromTextFile("/Users/df/Desktop/labyrinthe2.txt");
+		
 		GraphInterface g = (GraphInterface)m;
 		VertexInterface dep = (VertexInterface)m.getDeparture();
 		VertexInterface arr = (VertexInterface)m.getArrival();
@@ -43,8 +48,9 @@ public class MaintTest {
 //		
 //		System.out.print(res);
 		
-		
+
 		new DrawingApp(m);
+		//new ErrorMessageWindow("test", -1);
 		
 		
 		

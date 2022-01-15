@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Dimension;
-import java.io.IOException;
 import java.awt.BorderLayout;
 
 import javax.swing.BoxLayout;
@@ -9,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import maze.Maze;
-import maze.MazeReadingException;
+
 
 public class DrawingApp extends JFrame{
 
@@ -19,20 +18,18 @@ public class DrawingApp extends JFrame{
 	private JPanel buttonPanel;
 	private DrawingGrid drawingGrid;
 	
-	public DrawingApp(Maze maze) throws MazeReadingException, IOException {
+	public DrawingApp(Maze maze) {
 		super("Maze solver");
 		
 		drawingGrid = new DrawingGrid(maze);
 		
-		setupUI();
-		addGrid(maze);
-		setupComputeButton(maze);
-		pack();
-		setVisible(true);
+		setupUI(maze);
+		
+		
 	}
 	
 	
-	public void setupUI() throws MazeReadingException, IOException {
+	public void setupUI(Maze maze)  {
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -43,37 +40,49 @@ public class DrawingApp extends JFrame{
 		setResizable(false);
 		setJMenuBar(new DrawingMenuBar(this));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		addGrid(maze);
+		setupComputeButton(maze);
+		pack();
+		setVisible(true);
 	}
 	
 	public void setupComputeButton(Maze maze) {
 		
 		
-		ComputeButton compute = new ComputeButton(drawingGrid, maze);
+		ComputeButton compute = new ComputeButton(this);
 		buttonPanel = new JPanel();
 		buttonPanel.add(compute, BorderLayout.SOUTH);
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		mainPanel.add(buttonPanel);
 		
-		
 	}
 	
-	public void addGrid(Maze maze) throws MazeReadingException {
+	public void addGrid(Maze maze) {
 		
 		mainPanel.add(drawingGrid);
 	}
 
 
-	public void updateUI(Maze newMaze) throws MazeReadingException, IOException {
-		mainPanel.remove(0);
-		//buttonPanel.remove(0);
-		setupComputeButton(newMaze);
-		mainPanel.add(drawingGrid = new DrawingGrid(newMaze));
+	public void updateUI(Maze newMaze)  {
 		
-		mainPanel.updateUI();
 		
-	
-
+		this.remove(mainPanel);
+		this.revalidate();
+		
+		drawingGrid = new DrawingGrid(newMaze);
+		
+		setupUI(newMaze);
+		
+		
 	}
+
+
+	public void computeButtonPressed() {
+		drawingGrid.tracePath();
+	}
+
+
 	
 	
 	

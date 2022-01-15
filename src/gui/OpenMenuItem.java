@@ -21,7 +21,7 @@ public class OpenMenuItem extends JMenuItem{
 	private static final long serialVersionUID = 1L;
 	private File selectedFile;
 	
-	public OpenMenuItem(DrawingApp drawingApp) throws MazeReadingException, IOException {
+	public OpenMenuItem(DrawingApp drawingApp) {
 		super("Open...");
 		
 		
@@ -44,29 +44,33 @@ public class OpenMenuItem extends JMenuItem{
 				
 				Maze newMaze = new Maze();
 				
+		
 				try {
-					try {
-						newMaze.initFromTextFile(selectedFile.getCanonicalPath());
-					} catch (IOException e1) {
-						new ErrorMessageWindow(selectedFile.getAbsolutePath(), -1);
-					}
-				} catch (MazeReadingException e2) {
-					e2.errorWindow();
-					e2.printStackTrace();
 					
+					newMaze.initFromTextFile(selectedFile.getCanonicalPath());
+					drawingApp.updateUI(newMaze);
+			
+				
+				} catch (MazeReadingException e1) {
 					
+					e1.errorWindow();
+					
+				
+				} catch (Exception exception) {
+					//Dans le cas ou c'est une autre erreur, une fenêtre d'erreur générique s'ouvre
+					new ErrorMessageWindow(null, -1);
 				}
 				
-				//Une fois l'objet (Maze)newMaze généré, on met à jour l'interface 
-				try {
-					drawingApp.updateUI(newMaze);
-				} catch (MazeReadingException e1) {
-					e1.errorWindow();
-				} catch (IOException e1) {
-					new ErrorMessageWindow(selectedFile.getAbsolutePath(), -1);
-				}
-			
 			}
+			
+			
+			
+			
+				
+				
+		
+			
+			
 			
 		});
 		

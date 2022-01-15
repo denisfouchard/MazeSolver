@@ -12,16 +12,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import maze.Maze;
+
+
 public class NewMazeSelection extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel mainPanel;
 	private String[] optionsToChoose = {"10x10", "20x20", "40x40", "100x100"};
-	private int dim;
+	private int dim = 0;
+
+	private DrawingApp app;
 	
-	public NewMazeSelection (){
+	public NewMazeSelection (DrawingApp drawingApp){
 		super("Create a new maze");
+		this.app=drawingApp;
 		
 		setupUI();
 		
@@ -39,18 +45,23 @@ public class NewMazeSelection extends JFrame {
 		        switch(selection.getItemAt(selection.getSelectedIndex())) {
 		        case "10x10":
 		        	dim = 10;
+		        	break;
 		        
 		        case "20x20":
 		        	dim = 20;
+		        	break;
 		        
 		        case "40x40":
 		        	dim = 40;
+		        	break;
 		        
 		        case "100x100":
 		        	dim = 100;
+		        	break;
 		        
 		        default:
-		        	dim = 10;
+		        System.out.println("unwanted default value in switch/case");
+		        	System.exit(123);
 		        }   
 		    }
 		});
@@ -86,7 +97,14 @@ public class NewMazeSelection extends JFrame {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+	
+				
+				Maze newMaze = new Maze(dim, dim);
+				newMaze.initEmptyMaze();
+				
+				
+				app.updateUI(newMaze);
+				
 				dispose();
 				
 			}
