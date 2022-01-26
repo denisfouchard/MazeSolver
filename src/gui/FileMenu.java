@@ -2,7 +2,10 @@ package gui;
 
 
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
+import javax.swing.event.MenuKeyEvent;
 
 
 
@@ -16,6 +19,7 @@ public class FileMenu extends JMenu{
 		super("File");
 		 // Ajouter des items
 		
+		setMnemonic(MenuKeyEvent.VK_F);
 		
 		add(new NewMenuItem(drawingApp));
 		add(new OpenMenuItem(drawingApp));

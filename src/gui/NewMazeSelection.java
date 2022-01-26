@@ -20,8 +20,8 @@ public class NewMazeSelection extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel mainPanel;
-	private String[] optionsToChoose = {"10x10", "20x20", "40x40", "100x100"};
-	private int dim = 0;
+	private String[] optionsToChoose = {"10x10", "20x20", "40x40"};
+	private int dim;
 
 	private DrawingApp app;
 	
@@ -55,9 +55,9 @@ public class NewMazeSelection extends JFrame {
 		        	dim = 40;
 		        	break;
 		        
-		        case "100x100":
-		        	dim = 100;
-		        	break;
+		        //case "100x100":
+		        //	dim = 100;
+		        //	break;
 		        
 		        default:
 		        System.out.println("unwanted default value in switch/case");
@@ -78,13 +78,16 @@ public class NewMazeSelection extends JFrame {
 		
 		
 		JTextField inputMessage = new JTextField();
+		
+		inputMessage.setEditable(false);
+		
 		inputMessage.setText("Please selection the dimensions of the new maze" );
 		mainPanel.add(inputMessage);
 		
 		setupMenu();
 		
 		this.add(mainPanel);
-		setPreferredSize(new Dimension(400, 300));
+		setPreferredSize(new Dimension(400, 150));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

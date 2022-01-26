@@ -6,16 +6,25 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import maze.Maze;
+
+
 
 public class ComputeButton extends JButton{
 	
 	
-	private DrawingApp app;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	public ComputeButton(DrawingApp app) {
 		super("Compute...");
-		this.app = app;
+
+		
+		//setMnemonic(KeyEvent.VK_C);
+		
+		
 		// Bouton de calcul du plus court chemin
 		this.setBounds(50, 100, 95, 30);
 		
@@ -26,7 +35,7 @@ public class ComputeButton extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				app.computeButtonPressed();
+				app.tracePath();
 				
 			}
 			

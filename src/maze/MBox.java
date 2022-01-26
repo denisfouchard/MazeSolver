@@ -7,6 +7,8 @@ public abstract class MBox implements VertexInterface {
 	private int x;
 	private int y;
 	private char type;
+	//private final ArrayList<char> authorizedTypes = {'A'; 'E'; 'W'; 'D'};
+	
 	
 	public MBox(int x0, int y0, char t) {
 		x = x0;
@@ -31,6 +33,10 @@ public abstract class MBox implements VertexInterface {
 	
 	public char getType() {
 		return this.type;
+	}
+	
+	public void setType(char Type) {
+		this.type = Type;
 	}
 	
 	@Override

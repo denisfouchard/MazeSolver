@@ -196,7 +196,7 @@ public class Maze implements GraphInterface {
 		ArrayList<VertexInterface> successors = new ArrayList<>();
 		
 		
-		if (x > 1) {
+		if (x >= 1) {
 			if (maze[x-1][y].getType() != 'W') {
 				successors.add(maze[x-1][y]);
 			}
@@ -206,7 +206,7 @@ public class Maze implements GraphInterface {
 				successors.add(maze[x+1][y]);
 			}
 		}
-		if (y > 1) {
+		if (y >= 1) {
 			if (maze[x][y-1].getType() != 'W') {
 				successors.add(maze[x][y-1]);
 			}

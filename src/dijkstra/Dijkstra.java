@@ -1,6 +1,18 @@
 package dijkstra;
 
 public class Dijkstra {
+
+	/**
+	 * Description
+	 *
+	 * @author Denis Fouchard
+	 * @param g - le graphe
+	 * @param r - le sommet de départ
+	 * @param a - le sommet d'arrivée
+	 * @param pi - la structure qui stocke les distances à r
+	 * @param previous - la structure qui stocke le sommet précédent dans le plus court chemin
+	 * @return previous - le plus cours chemin dans une structure qui donne pour chaque sommet son antécédent
+	 */
 	public static PreviousInterface dijkstra(GraphInterface g, VertexInterface r, ASetInterface a, PiInterface pi, PreviousInterface previous) {
 		a.addA(r);
 		VertexInterface pivot = r;
