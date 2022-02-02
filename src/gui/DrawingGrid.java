@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
-
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -30,14 +30,14 @@ public class DrawingGrid extends JPanel{
 	private int cols;
 	private Maze maze;
 	private DrawingApp app;
-	private JButton[][] grid;
+	private CaseBox[][] grid;
 	private ImageLoader imageLoader;
 	
 	public DrawingGrid(DrawingApp app, Maze maze) {
 		super();
 		this.rows = maze.getRows();
 		this.cols = maze.getCols();	
-		this.grid = new JButton[cols][rows];
+		this.grid = new CaseBox[cols][rows];
 		this.maze = maze;
 		this.app = app;
 		this.imageLoader = new ImageLoader(maze.getCols());
@@ -56,20 +56,19 @@ public class DrawingGrid extends JPanel{
 		
 		// Dimensions du labyrinthe
 		
-		paintGrid();
 		
-		
-		
-		
+
 		//Remplir la grille avec les données du Labyrinthe
 		
 		this.setLayout(new GridLayout(rows, cols));
+		paintGrid();
+	
 }
 	
 	
 	public void paintGrid() {
 		
-		JButton caseButton = null;
+		CaseBox caseBox = null;
 		Color arrivalColor = Color.RED;
 		Color departureColor = Color.BLUE;
 		
@@ -79,38 +78,38 @@ public class DrawingGrid extends JPanel{
 				switch(maze.maze[i][j].getType()) {
 				
 				case 'A':
-					caseButton = new CaseButton(this.app, imageLoader, maze, i, j);
-					caseButton.setBackground(arrivalColor);
-					this.add(caseButton);
-					grid[i][j] = caseButton;
+					caseBox = new CaseBox(this.app, imageLoader, maze, i, j);
+					caseBox.setBackground(arrivalColor);
+					this.add(caseBox);
+					grid[i][j] = caseBox;
 					break;
 					
 				case 'D':
-					caseButton = new CaseButton(this.app, imageLoader, maze, i, j);
-					caseButton.setBackground(departureColor);
+					caseBox = new CaseBox(this.app, imageLoader, maze, i, j);
+					caseBox.setBackground(departureColor);
 			
 				
-					this.add(caseButton);
-					grid[i][j] = caseButton;
+					this.add(caseBox);
+					grid[i][j] = caseBox;
 					break;
 				
 				case 'E':
 					
-					caseButton = new CaseButton(this.app, imageLoader, maze, i, j);
+					caseBox = new CaseBox(this.app, imageLoader, maze, i, j);
 					//caseButton.setBackground(emptyColor);
-					caseButton.setIcon(this.imageLoader.getIcon("grass"));
+					caseBox.setBackground(Color.WHITE);
 					
-					this.add(caseButton);
-					grid[i][j] = caseButton;
+					this.add(caseBox);
+					grid[i][j] = caseBox;
 					break;
 			
 				case 'W':
-					caseButton = new CaseButton(this.app, imageLoader, maze, i, j);
+					caseBox = new CaseBox(this.app, imageLoader, maze, i, j);
 					//caseButton.setBackground(wallColor);
-					caseButton.setIcon(this.imageLoader.getIcon("cobblestone"));
+					caseBox.setBackground(Color.BLACK);
 					
-					this.add(caseButton);
-					grid[i][j] = caseButton;
+					this.add(caseBox);
+					grid[i][j] = caseBox;
 					break;
 				
 				default:
@@ -129,7 +128,7 @@ public class DrawingGrid extends JPanel{
 	
 public void repaintGrid() {
 		
-		JButton caseButton = null;
+		CaseBox caseBox = null;
 		Color arrivalColor = Color.RED;
 		Color departureColor = Color.BLUE;
 		
@@ -139,29 +138,29 @@ public void repaintGrid() {
 				switch(maze.maze[i][j].getType()) {
 				
 				case 'A':
-					caseButton = grid[i][j];
-					caseButton.setBackground(arrivalColor);
+					caseBox = grid[i][j];
+					caseBox.setBackground(arrivalColor);
 					
 					
 					break;
 					
 				case 'D':
-					caseButton = grid[i][j];
-					caseButton.setBackground(departureColor);
+					caseBox = grid[i][j];
+					caseBox.setBackground(departureColor);
 			
 					break;
 				
 				case 'E':
 					
-					caseButton = grid[i][j];
-					caseButton.setIcon(this.imageLoader.getIcon("grass"));
+					caseBox = grid[i][j];
+					caseBox.setBackground(Color.WHITE);
 				
 					break;
 			
 				case 'W':
-					caseButton = grid[i][j];
+					caseBox = grid[i][j];
 					//caseButton.setBackground(wallColor);
-					caseButton.setIcon(this.imageLoader.getIcon("cobblestone"));
+					caseBox.setBackground(Color.BLACK);
 					
 					break;
 				
@@ -197,15 +196,15 @@ public void repaintGrid() {
 		Pi pi = new Pi(maze);
 		prev = (Previous) Dijkstra.dijkstra(g, dep, a, pi, prev);
 		
-		ArrayList<JButton> pathButtons = new ArrayList<>();
+		ArrayList<CaseBox> pathCases = new ArrayList<>();
 		
 		VertexInterface v = prev.getPrevious(arr);
 		while (v != dep && prev.getPrevious(v) != v) {
 			int i = v.getX();
 			int j = v.getY();
-			JButton pathCase = grid[i][j];
+			CaseBox pathCase = grid[i][j];
 			
-			pathButtons.add(pathCase);
+			pathCases.add(pathCase);
 			v = prev.getPrevious(v);
 			
 		}
@@ -214,8 +213,9 @@ public void repaintGrid() {
 		
 		//On ne colorie les cases que si Dijkstra a réussi
 		if (v == dep) {
-			for (JButton pathCase : pathButtons) {
-				pathCase.setIcon(this.imageLoader.getIcon("sand"));
+			repaintGrid();
+			for (CaseBox pathCase : pathCases) {
+				pathCase.setBackground(Color.GREEN);
 				
 			}
 			
