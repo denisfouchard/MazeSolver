@@ -85,6 +85,7 @@ public class DrawingApp extends JFrame{
 	
 	public void refreshGrid() {	
 		drawingGrid.repaintGrid();
+		revalidate();
 		
 		//gridPanel.revalidate();
 		//mainPanel.revalidate();
