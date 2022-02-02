@@ -40,7 +40,7 @@ public class CaseBox extends Box implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Pressé !");
+
 		switch (maze.maze[x][y].getType()) {
 
 			case 'E':
