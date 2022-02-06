@@ -20,11 +20,15 @@ public class NewMazeSelection extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel mainPanel;
-	private String[] optionsToChoose = {"10x10", "20x20", "40x40"};
+	private String[] optionsToChoose = {"10x10", "20x20", "40x40", "100x100"};
 	private int dim;
 
 	private DrawingApp app;
-	
+
+
+
+	private JComboBox<String> selection;
+
 	public NewMazeSelection (DrawingApp drawingApp){
 		super("Create a new maze");
 		this.app=drawingApp;
@@ -37,35 +41,10 @@ public class NewMazeSelection extends JFrame {
 	}
 	
 	public void setupMenu() {
-		JComboBox<String> selection = new JComboBox<>(optionsToChoose);
+		selection = new JComboBox<>(optionsToChoose);
 		selection.setBounds(80, 50, 140, 20);
 		
-		selection.addActionListener (new ActionListener () {
-		    public void actionPerformed(ActionEvent e) {
-		        switch(selection.getItemAt(selection.getSelectedIndex())) {
-		        case "10x10":
-		        	dim = 10;
-		        	break;
-		        
-		        case "20x20":
-		        	dim = 20;
-		        	break;
-		        
-		        case "40x40":
-		        	dim = 40;
-		        	break;
-		        
-		        //case "100x100":
-		        //	dim = 100;
-		        //	break;
-		        
-		        default:
-		        System.out.println("unwanted default value in switch/case");
-		        	System.exit(123);
-		        }   
-		    }
-		});
-		
+
 		mainPanel.add(selection);
 		
 		
@@ -100,8 +79,33 @@ public class NewMazeSelection extends JFrame {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-	
-				
+
+
+
+				String s = selection.getItemAt(selection.getSelectedIndex());
+				switch(s) {
+					case "10x10":
+						dim = 10;
+						break;
+
+					case "20x20":
+						dim = 20;
+						break;
+
+					case "40x40":
+						dim = 40;
+						break;
+
+					case "100x100":
+						dim = 100;
+						break;
+
+					default:
+						System.out.println("unwanted default value in switch/case");
+						System.exit(123);
+				}
+
+
 				Maze newMaze = new Maze(dim, dim);
 				newMaze.initEmptyMaze();
 				
@@ -120,10 +124,7 @@ public class NewMazeSelection extends JFrame {
 		
 		
 	}
-	
-	public int getDim() {
-		return dim;
-	}
+
 	
 
 }

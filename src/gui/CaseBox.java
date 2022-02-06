@@ -1,10 +1,11 @@
 package gui;
 
 
-import java.awt.Color;
+import java.awt.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,9 +25,10 @@ public class CaseBox extends Box implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	public CaseBox(DrawingApp app, ImageLoader imLoader, Maze maze, int x, int y) {
 		super(BoxLayout.X_AXIS);
-		
+
 		this.maze = maze;
 		this.app = app;
 		this.x = x;
@@ -35,30 +37,13 @@ public class CaseBox extends Box implements MouseListener {
 		setOpaque(true);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		addMouseListener(this);
-	
+
 		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		switch (maze.maze[x][y].getType()) {
 
-			case 'E':
-				maze.maze[x][y].setType('W');
-				setBackground(Color.WHITE);
-				break;
-
-			case 'W':
-				maze.maze[x][y].setType('E');
-				setBackground(Color.BLACK);
-				break;
-			default:
-
-		}
-
-		if (app.getAutoComputeStatus() == 1) {
-			app.tracePath();
-		}
 	
 	}
 
@@ -70,19 +55,35 @@ public class CaseBox extends Box implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		//System.out.println("Current type " +maze.maze[x][y].getType() );
+		switch (maze.maze[x][y].getType()) {
+			case 'E':
+				maze.maze[x][y].setType('W');
+				break;
+			case 'W':
+				maze.maze[x][y].setType('E');
+				break;
+			default:
+
+		}
+		//System.out.println("Changed type " +maze.maze[x][y].getType() );
+
+
+		if (app.getAutoComputeStatus() == 1) {
+			app.computePath();
+		}
+		app.repaintGrid();
+
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -22,9 +22,11 @@ public class ErrorMessageWindow extends JFrame {
 		setupUI(fileName, lineNumber);
 		setupOKButton();
 		pack();
-		setVisible(true);
 		toFront();
 		requestFocus();
+		setVisible(true);
+
+
 	}
 	
 	

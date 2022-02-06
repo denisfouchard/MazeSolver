@@ -37,33 +37,35 @@ public class OpenMenuItem extends JMenuItem{
 				JFileChooser fileChooser;
 				fileChooser = new JFileChooser();
 				
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
 				int result = fileChooser.showOpenDialog(new JPanel());
 				if (result == JFileChooser.APPROVE_OPTION) {
 				    selectedFile = fileChooser.getSelectedFile();
 				    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+
+					Maze newMaze = new Maze();
+
+
+					try {
+
+						newMaze.initFromTextFile(selectedFile.getCanonicalPath());
+						drawingApp.updateUI(newMaze);
+
+
+					} catch (MazeReadingException e1) {
+
+						e1.errorWindow();
+
+
+					} catch (Exception exception) {
+						//Dans le cas ou c'est une autre erreur, une fenêtre d'erreur générique s'ouvre
+						new ErrorMessageWindow(null, -1);
+					}
 				}
 				
 				//A partir du chemin du fichier récuperé, on génère un nouveau objet (Maze)newMaze
 				
-				Maze newMaze = new Maze();
-				
-		
-				try {
-					
-					newMaze.initFromTextFile(selectedFile.getCanonicalPath());
-					drawingApp.updateUI(newMaze);
-			
-				
-				} catch (MazeReadingException e1) {
-					
-					e1.errorWindow();
-					
-				
-				} catch (Exception exception) {
-					//Dans le cas ou c'est une autre erreur, une fenêtre d'erreur générique s'ouvre
-					new ErrorMessageWindow(null, -1);
-				}
+
 				
 			}
 			
