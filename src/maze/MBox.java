@@ -1,9 +1,14 @@
 package maze;
 
-public abstract class MBox {
+
+import dijkstra.VertexInterface;
+
+public abstract class MBox implements VertexInterface {
 	private int x;
 	private int y;
-	public char type;
+	private char type;
+	//private final ArrayList<char> authorizedTypes = {'A'; 'E'; 'W'; 'D'};
+	
 	
 	public MBox(int x0, int y0, char t) {
 		x = x0;
@@ -25,5 +30,21 @@ public abstract class MBox {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public char getType() {
+		return this.type;
+	}
+	
+	public void setType(char Type) {
+		this.type = Type;
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + this.getX() + ", " + this.getY() + "]";
+	}
+
+	
+
 	
 }

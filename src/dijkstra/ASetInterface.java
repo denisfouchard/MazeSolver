@@ -1,4 +1,4 @@
-package graph;
+package dijkstra;
 
 public interface ASetInterface {
 	public void addA(VertexInterface u); //Ajouter un élément à l'ensemble

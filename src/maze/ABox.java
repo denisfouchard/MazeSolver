@@ -6,4 +6,6 @@ public class ABox extends MBox {
 		super(x, y, 'A');
 	}
 
+
+
 }
