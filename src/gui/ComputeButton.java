@@ -35,8 +35,9 @@ public class ComputeButton extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				app.computePath();
+
 				app.repaintGrid();
+				app.computePath();
 				
 			}
 			

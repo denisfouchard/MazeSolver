@@ -27,7 +27,8 @@ public class DrawingGrid extends JPanel {
     private DrawingApp app;
     private CaseBox[][] grid;
     private ImageLoader imageLoader;
-    private boolean dijkstraSuccesful;
+    private boolean DijkstraSuccessful;
+    private final ArrayList<CaseBox> pathCases = new ArrayList<>();
 
     public DrawingGrid(DrawingApp app) {
         super();
@@ -111,18 +112,10 @@ public class DrawingGrid extends JPanel {
             }
         }
 
-
-        if (dijkstraSuccesful) {
-            for (CaseBox pathCase : pathCases) {
-                pathCase.setBackground(Color.GREEN);
-            }
-        }
-
-
         app.repaint();
     }
 
-    private final ArrayList<CaseBox> pathCases = new ArrayList<>();
+
 
     public void computePath() {
 
@@ -151,7 +144,15 @@ public class DrawingGrid extends JPanel {
         }
 
         //On ne colorie les cases que si Dijkstra a réussi
-        dijkstraSuccesful = (v == dep);
+        DijkstraSuccessful = (v == dep);
+
+        System.out.println("Success ! ");
+
+        if (DijkstraSuccessful) {
+            for (CaseBox pathCase : pathCases) {
+                pathCase.setBackground(Color.GREEN);
+            }
+        }
 
     }
 

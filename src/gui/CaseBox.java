@@ -59,6 +59,8 @@ public class CaseBox extends Box implements MouseListener {
 		switch (maze.maze[x][y].getType()) {
 			case 'E':
 				maze.maze[x][y].setType('W');
+				setBackground(Color.BLACK);
+				System.out.println("Reset de la case");
 				break;
 			case 'W':
 				maze.maze[x][y].setType('E');
@@ -68,11 +70,13 @@ public class CaseBox extends Box implements MouseListener {
 		}
 		//System.out.println("Changed type " +maze.maze[x][y].getType() );
 
+		app.repaintGrid();
 
 		if (app.getAutoComputeStatus() == 1) {
 			app.computePath();
 		}
-		app.repaintGrid();
+
+		repaint();
 
 		
 	}
