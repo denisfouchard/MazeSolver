@@ -16,25 +16,17 @@ import maze.Maze;
 
 
 public class NewMazeSelection extends JFrame {
-
 	private static final long serialVersionUID = 1L;
-	
 	private JPanel mainPanel;
-	private String[] optionsToChoose = {"10x10", "20x20", "40x40", "100x100"};
+	private String[] optionsToChoose = {"10x10", "20x20", "30x30", "40x40"};
 	private int dim;
-
 	private DrawingApp app;
-
-
-
 	private JComboBox<String> selection;
 
 	public NewMazeSelection (DrawingApp drawingApp){
 		super("Create a new maze");
 		this.app=drawingApp;
-		
 		setupUI();
-		
 		setupOKButton();
 		pack();
 		setVisible(true);
@@ -43,23 +35,17 @@ public class NewMazeSelection extends JFrame {
 	public void setupMenu() {
 		selection = new JComboBox<>(optionsToChoose);
 		selection.setBounds(80, 50, 140, 20);
-		
-
 		mainPanel.add(selection);
-		
-		
 	}
 	
 	public void setupUI() {
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		
-		
+
+		// Ajout du texte de consignes
 		JTextField inputMessage = new JTextField();
-		
 		inputMessage.setEditable(false);
-		
 		inputMessage.setText("Please selection the dimensions of the new maze" );
 		mainPanel.add(inputMessage);
 		
@@ -79,41 +65,18 @@ public class NewMazeSelection extends JFrame {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// On récupère la taille séléctionnée
+				int[] dimensions = {10, 20, 30, 40};
+				int s = selection.getSelectedIndex();
+				dim = dimensions[s];
 
-
-
-				String s = selection.getItemAt(selection.getSelectedIndex());
-				switch(s) {
-					case "10x10":
-						dim = 10;
-						break;
-
-					case "20x20":
-						dim = 20;
-						break;
-
-					case "40x40":
-						dim = 40;
-						break;
-
-					case "100x100":
-						dim = 100;
-						break;
-
-					default:
-						System.out.println("unwanted default value in switch/case");
-						System.exit(123);
-				}
-
-
+				// On crée un Empty Maze que l'on ajoute à la grille
 				Maze newMaze = new Maze(dim, dim);
 				newMaze.initEmptyMaze();
-				
-				
 				app.updateUI(newMaze);
-				
+
+				// On ferme la fenêtre de dialogue
 				dispose();
-				
 			}
         });
 		

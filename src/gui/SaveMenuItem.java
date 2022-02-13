@@ -31,18 +31,19 @@ public class SaveMenuItem extends JMenuItem{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				//Crée une fenêtre de sélection du fichier
 				JFileChooser directoryChooser = new JFileChooser();
-				
 				directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				
 				directoryChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+				//Récupère le chemin choisi par l'utilisateur
 				int result = directoryChooser.showSaveDialog(new JPanel());
+
+				//Enregistre le Maze
 				if (result == JFileChooser.APPROVE_OPTION) {
 				    selectedDir = directoryChooser.getSelectedFile();
 				    System.out.println("Selected dir: " + selectedDir.getAbsolutePath());
 				}
-				
 				try {
 					drawingApp.saveMazeToTextFile(selectedDir.getAbsolutePath());
 				} catch (FileNotFoundException e1) {

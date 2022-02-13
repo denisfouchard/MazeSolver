@@ -83,20 +83,6 @@ public class DrawingApp extends JFrame {
         mainPanel.revalidate();
     }
 
-    public DrawingGrid getDrawingGrid() {
-        return drawingGrid;
-    }
-
-    public void refreshGrid() {
-        drawingGrid.repaintGrid();
-        revalidate();
-
-        //gridPanel.revalidate();
-        //mainPanel.revalidate();
-        //this.revalidate();
-    }
-
-
     public void updateUI(Maze newMaze) {
         this.maze = newMaze;
         gridPanel.remove(drawingGrid);
@@ -109,7 +95,6 @@ public class DrawingApp extends JFrame {
     public void computePath() {
         drawingGrid.computePath();
     }
-
 
     public void saveMazeToTextFile(String fileName) throws FileNotFoundException {
 

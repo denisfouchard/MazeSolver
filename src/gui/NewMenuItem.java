@@ -17,7 +17,6 @@ public class NewMenuItem extends JMenuItem{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	public NewMenuItem(DrawingApp drawingApp) {
 		super("New");
 	
@@ -27,15 +26,8 @@ public class NewMenuItem extends JMenuItem{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				new NewMazeSelection(drawingApp);
-				
-				
-				
-			
 			}
-		
-		
 		});
 	}
 }

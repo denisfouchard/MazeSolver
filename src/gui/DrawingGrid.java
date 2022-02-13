@@ -146,7 +146,7 @@ public class DrawingGrid extends JPanel {
         //On ne colorie les cases que si Dijkstra a réussi
         DijkstraSuccessful = (v == dep);
 
-        System.out.println("Success ! ");
+
 
         if (DijkstraSuccessful) {
             for (CaseBox pathCase : pathCases) {

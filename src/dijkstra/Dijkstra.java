@@ -24,12 +24,7 @@ public class Dijkstra {
 		}
 		
 		while (pivot !=null) { //On teste tant que A n'est pas totalement rempli
-			
-			//System.out.println(g.getSuccessors(pivot).toString());
-			
-			
 			for (VertexInterface y : g.getSuccessors(pivot)) {
-				//System.out.println(g.getSuccessors(pivot).size());
 				if (!a.isIn(y)) {
 					if (pi.getDistance(pivot) + 1 < pi.getDistance(y) ) {
 						pi.setDistance(y, pi.getDistance(pivot) + 1);
@@ -37,8 +32,6 @@ public class Dijkstra {
 					}
 				}
 			}
-			
-			
 			VertexInterface closest = null;
 			int d = Integer.MAX_VALUE;
 			
@@ -54,10 +47,6 @@ public class Dijkstra {
 			}
 			pivot = closest;
 			a.addA(pivot);
-			if (pivot != null) {
-				
-			//System.out.println(pivot.getType() + pivot.toString());
-			}
 		}
 		return previous;
 	}

@@ -21,14 +21,13 @@ public class CaseBox extends Box implements MouseListener {
 	private DrawingApp app;
 	
 	/**
-	 * 
+	 * @author Denis Fouchard
 	 */
 	private static final long serialVersionUID = 1L;
 
 
 	public CaseBox(DrawingApp app, ImageLoader imLoader, Maze maze, int x, int y) {
 		super(BoxLayout.X_AXIS);
-
 		this.maze = maze;
 		this.app = app;
 		this.x = x;
@@ -37,30 +36,26 @@ public class CaseBox extends Box implements MouseListener {
 		setOpaque(true);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		addMouseListener(this);
-
 		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-
-	
+		//Ne fait rien
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
-		
+		// Ne fait rien
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		//System.out.println("Current type " +maze.maze[x][y].getType() );
+
 		switch (maze.maze[x][y].getType()) {
 			case 'E':
 				maze.maze[x][y].setType('W');
 				setBackground(Color.BLACK);
-				System.out.println("Reset de la case");
+				
 				break;
 			case 'W':
 				maze.maze[x][y].setType('E');
@@ -68,7 +63,7 @@ public class CaseBox extends Box implements MouseListener {
 			default:
 
 		}
-		//System.out.println("Changed type " +maze.maze[x][y].getType() );
+
 
 		app.repaintGrid();
 

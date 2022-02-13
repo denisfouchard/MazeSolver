@@ -9,6 +9,8 @@ public class ImageLoader {
 	
 private static HashMap<String,ImageIcon>  icons = new HashMap<>();
 
+// Code inutile dans une implémentation par Box
+
 public ImageLoader(int size)
 {
 	int pix = 55*10/size;
