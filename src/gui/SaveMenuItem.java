@@ -47,7 +47,7 @@ public class SaveMenuItem extends JMenuItem{
 				try {
 					drawingApp.saveMazeToTextFile(selectedDir.getAbsolutePath());
 				} catch (FileNotFoundException e1) {
-					new ErrorMessageWindow(null, -1);
+					new ErrorMessageWindow(null, -1,"Task failed");
 				}
 				
 			}

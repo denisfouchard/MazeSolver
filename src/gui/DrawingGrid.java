@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -18,9 +19,7 @@ import maze.MazeReadingException;
 
 public class DrawingGrid extends JPanel {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private int rows;
     private int cols;
@@ -30,30 +29,29 @@ public class DrawingGrid extends JPanel {
     private boolean DijkstraSuccessful;
     private final ArrayList<CaseBox> pathCases = new ArrayList<>();
 
+    /**
+     * Draw the grid on the screen according to the data provided.
+     * @param app the application JFrame.
+     */
     public DrawingGrid(DrawingApp app) {
         super();
         this.rows = app.getMaze().getRows();
         this.cols = app.getMaze().getCols();
-        this.grid = new CaseBox[cols][rows];
-
+        this.grid = new CaseBox[rows][cols];
         this.app = app;
+        int width = (app.getMaze().getCols()* 50);
+        int height = (app.getMaze().getRows()* 50);
         this.imageLoader = new ImageLoader(app.getMaze().getCols());
-        setPreferredSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(300, 300));
+        setMaximumSize(new Dimension(1200, 1200));
+        setPreferredSize(new Dimension(width, height));
         setupGrid();
-
-
     }
 
-
+    /**
+     * Setup the layout for the grid.
+     */
     public void setupGrid() {
-
-        // Couleurs du labyrinthe
-
-
-        // Dimensions du labyrinthe
-
-
-        //Remplir la grille avec les données du Labyrinthe
 
         this.setLayout(new GridLayout(rows, cols));
         initGrid();
@@ -62,6 +60,9 @@ public class DrawingGrid extends JPanel {
     }
 
 
+    /**
+     * Initiate an empty grid with the given dimensions.
+     */
     public void initGrid() {
 
         for (int i = 0; i < rows; i++) {
@@ -75,15 +76,23 @@ public class DrawingGrid extends JPanel {
     }
 
 
+    /**
+     * Update and refresh the grid layout with the new information stored.
+     */
     public void repaintGrid() {
 
         Color arrivalColor = Color.RED;
         Color departureColor = Color.BLUE;
+        System.out.println("Il y a : " + rows + " lignes.");
 
+        app.getMaze().printMaze();
+
+        //todo : Gérer les exceptions avant d'afficher le new maze/changer le layout
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 try {
+
                     switch (app.getMaze().maze[i][j].getType()) {
 
                         case 'A':
@@ -107,7 +116,7 @@ public class DrawingGrid extends JPanel {
                     }
 
                 } catch (MazeReadingException e) {
-                    System.out.println(e.getMessage());
+                    e.errorWindow();
                 }
             }
         }
@@ -116,6 +125,10 @@ public class DrawingGrid extends JPanel {
     }
 
 
+    /**
+     * Compute the shortest path using Dijkstra's algorithm and paint corresponding cases if
+     * the computation succeeds.
+     */
 
     public void computePath() {
 

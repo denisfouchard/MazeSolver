@@ -30,11 +30,11 @@ public class DrawingApp extends JFrame {
         super("Maze solver");
         this.maze = maze;
         drawingGrid = new DrawingGrid(this);
-        setupUI(maze);
+        setupUI();
     }
 
 
-    public void setupUI(Maze maze) {
+    public void setupUI() {
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -50,13 +50,13 @@ public class DrawingApp extends JFrame {
         mainPanel.add(gridPanel);
 
         addGrid();
-        setupComputeButton(maze);
+        setupComputeButton();
         pack();
         setVisible(true);
     }
 
 
-    public void setupComputeButton(Maze maze) {
+    public void setupComputeButton() {
         ComputeButton compute = new ComputeButton(this);
         buttonPanel = new JPanel();
         buttonPanel.add(compute, BorderLayout.SOUTH);
@@ -115,6 +115,6 @@ public class DrawingApp extends JFrame {
     }
 
     public void repaintGrid() {
-    drawingGrid.repaintGrid();
+        drawingGrid.repaintGrid();
     }
 }

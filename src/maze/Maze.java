@@ -30,18 +30,20 @@ public class Maze implements GraphInterface {
 		cols  = j;
 		
 	}
-	
-	public Maze(int i, int j, MBox[] list_boxes) {
-		
-		//Pas utile, à supprimer
-		
-		maze = new MBox[i][j];
-		rows = i;
-		cols  = j;
-		for (MBox box : boxes) {
-			maze[box.getX()][box.getY()] = box;
-		}
+
+	/**
+	 * Affiche le labyrhinthe dans la console.
+	 */
+	public void printMaze()  {
+		for (int i = 0; i < rows; i++) {
+			String row = new String();
+			for (int j = 0; j < cols; j++) {
+					row += maze[i][j].getType();
+				}
+			System.out.println(row);
+			}
 	}
+
 	
 	
 	public void initEmptyMaze() {
@@ -84,28 +86,25 @@ public class Maze implements GraphInterface {
 		while ((strCurrentLine = buff.readLine()) != null) {
 			fileLines.add(strCurrentLine);
 		}
+
+		rows = fileLines.size();
+		cols  = fileLines.get(0).length();
+
 		
-		int n = fileLines.size();	
-		int m = fileLines.get(0).length();
-		
-		rows = n;
-		cols  = m;
-		
-		size = n*m;
-		
-		maze = new MBox[n][m];
+		maze = new MBox[rows][cols];
+
 		char Box;
 		String currentLine;
 		
-		for (int i = 0; i < n; i+=1) {
+		for (int i = 0; i < rows; i+=1) {
 			try {
 				currentLine = fileLines.get(i);
 				
-				if (currentLine.length() != m) {
-					throw new MazeReadingException(fileName, i, "NotAMaze");
+				if (currentLine.length() != cols) {
+					throw new MazeReadingException(fileName, i, "Invalid row length");
 					} 
 				
-				for (int j = 0; j < m; j+=1) {
+				for (int j = 0; j < cols; j+=1) {
 					Box = currentLine.charAt(j);
 					
 					
@@ -135,10 +134,17 @@ public class Maze implements GraphInterface {
 
 			} catch (MazeReadingException e) {
 				// Affiche une fenêtre d'erreur avec le nom de la ligne
-				e.printStackTrace();
+				e.errorWindow();
 			}
 		}
 		buff.close();
+		try {
+			if (arrival == null || departure == null){
+				throw new MazeReadingException(fileName, -1, "Il manque l'arrivée et/ou le départ");
+			}
+		} catch (MazeReadingException daex){
+			daex.errorWindow();
+		}
 	}
 	
 	public final void saveToTextFile(String fileName) throws FileNotFoundException {

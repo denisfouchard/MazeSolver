@@ -4,11 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class ErrorMessageWindow extends JFrame {
 
@@ -16,10 +12,10 @@ public class ErrorMessageWindow extends JFrame {
 	
 	private JPanel mainPanel;
 	
-	public ErrorMessageWindow (String fileName, int lineNumber){
+	public ErrorMessageWindow (String fileName, int lineNumber, String givenErrorMessage){
 		super("Error");
 		
-		setupUI(fileName, lineNumber);
+		setupUI(fileName, lineNumber, givenErrorMessage);
 		setupOKButton();
 		pack();
 		toFront();
@@ -30,23 +26,28 @@ public class ErrorMessageWindow extends JFrame {
 	}
 	
 	
-	public void setupUI(String fileName, int lineNumber) {
+	public void setupUI(String fileName, int lineNumber, String givenErrorMessage) {
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		
 		
-		JTextField errorMessage = new JTextField();
+		JTextArea errorMessage = new JTextArea();
+		errorMessage.setEditable(false);
+		errorMessage.setBounds(20,20, 300, 300);
+		errorMessage.setWrapStyleWord(true);
+		errorMessage.setLineWrap(true);
+		errorMessage.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		
 		if (fileName != null) {
 		
 			if (lineNumber >= 0) {
-				errorMessage.setText("An error has occured at line " + lineNumber + " : " + fileName + " is not a correct Maze File." );
+				errorMessage.setText("An error has occurred at line " + lineNumber + " with " + fileName + " : " + givenErrorMessage );
 			} else {
-				errorMessage.setText("An error has occured : " + fileName + " is not a correct Maze File." );
+				errorMessage.setText("An error has occurred with " + fileName + " : " + givenErrorMessage );
 		} 
 			}else {
-				errorMessage.setText("An error has occured during file reading.");
+				errorMessage.setText("An error has occurred during file reading.");
 		}
 			
 		
@@ -54,7 +55,7 @@ public class ErrorMessageWindow extends JFrame {
 		mainPanel.add(errorMessage);
 		
 		this.add(mainPanel);
-		setPreferredSize(new Dimension(300, 100));
+		setPreferredSize(new Dimension(350, 250));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -75,8 +76,8 @@ public class ErrorMessageWindow extends JFrame {
         });
 		
 		
-		buttonPanel.add(okButton, BorderLayout.SOUTH);
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(okButton);
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		mainPanel.add(buttonPanel);
 		
 		
