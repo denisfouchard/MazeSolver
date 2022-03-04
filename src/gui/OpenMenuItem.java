@@ -36,6 +36,7 @@ public class OpenMenuItem extends JMenuItem{
 				
 				JFileChooser fileChooser;
 				fileChooser = new JFileChooser();
+				boolean initiated = false;
 				
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
 				int result = fileChooser.showOpenDialog(new JPanel());
@@ -48,14 +49,7 @@ public class OpenMenuItem extends JMenuItem{
 
 					try {
 
-						newMaze.initFromTextFile(selectedFile.getCanonicalPath());
-
-						try {
-							drawingApp.updateUI(newMaze);
-						}
-						catch (Exception ex){
-							ex.printStackTrace();
-						}
+						initiated = newMaze.initFromTextFile(selectedFile.getCanonicalPath());
 
 
 					} catch (MazeReadingException e1) {
@@ -63,11 +57,23 @@ public class OpenMenuItem extends JMenuItem{
 						e1.errorWindow();
 
 
+
 					} catch (Exception exception) {
 						//Dans le cas ou c'est une autre erreur, une fenêtre d'erreur générique s'ouvre
 						new ErrorMessageWindow(null, -1, "Task failed");
 						exception.printStackTrace();
+
 					}
+
+					if (initiated){
+						try {
+							drawingApp.updateUI(newMaze);
+						}
+						catch (Exception ex){
+							ex.printStackTrace();
+						}
+					}
+
 
 				}
 				

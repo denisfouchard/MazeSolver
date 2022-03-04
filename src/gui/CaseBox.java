@@ -51,16 +51,23 @@ public class CaseBox extends Box implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		switch (maze.maze[x][y].getType()) {
-			case 'E':
+		if (app.getMode() == "setDeparture"){
+			maze.setDeparture(x,y);
+			setBackground(Color.BLUE);
+			app.resetMode();
+		} else if (app.getMode() == "setArrival"){
+			maze.setArrival(x,y);
+			setBackground(Color.RED);
+			app.resetMode();
+		} else {
+			if (maze.maze[x][y].getType() == 'W'){
+				maze.maze[x][y].setType('E');
+				setBackground(Color.WHITE);
+
+			} else if (maze.maze[x][y].getType() == 'E'){
 				maze.maze[x][y].setType('W');
 				setBackground(Color.BLACK);
-				
-				break;
-			case 'W':
-				maze.maze[x][y].setType('E');
-				break;
-			default:
+			}
 
 		}
 

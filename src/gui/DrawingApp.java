@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.awt.BorderLayout;
+import java.util.Set;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ public class DrawingApp extends JFrame {
     private DrawingGrid drawingGrid;
     private Maze maze;
     private int autoComputeStatus = 0;
+    private String mode;
 
 
     public DrawingApp(Maze maze) {
@@ -33,9 +35,10 @@ public class DrawingApp extends JFrame {
         setupUI();
     }
 
-
+    /**
+     * Initialise l'interface de la fenêtre
+     */
     public void setupUI() {
-
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         gridPanel = new JPanel();
@@ -50,19 +53,25 @@ public class DrawingApp extends JFrame {
         mainPanel.add(gridPanel);
 
         addGrid();
-        setupComputeButton();
+        setButtonLayout();
         pack();
         setVisible(true);
     }
 
-
-    public void setupComputeButton() {
+    /**
+     * Met en place le layout des boutons (compute, setArrival, setDeparture)
+     */
+    public void setButtonLayout() {
         ComputeButton compute = new ComputeButton(this);
+        SetDepartureButton setDepartureButton = new SetDepartureButton(this);
+        SetArrivalButton setArrivalButton = new SetArrivalButton(this);
         buttonPanel = new JPanel();
         buttonPanel.add(compute, BorderLayout.SOUTH);
+        buttonPanel.add(setDepartureButton, BorderLayout.EAST);
+        buttonPanel.add(setArrivalButton, BorderLayout.EAST);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-        JCheckBox autoCompute = new JCheckBox("Auto-compute (not fully working...)");
+        JCheckBox autoCompute = new JCheckBox("Auto-compute");
 
         autoCompute.addActionListener(new ActionListener() {
 
@@ -116,5 +125,16 @@ public class DrawingApp extends JFrame {
 
     public void repaintGrid() {
         drawingGrid.repaintGrid();
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+    public String getMode(){
+        return mode;
+    }
+
+    public void resetMode() {
+        mode = "normal";
     }
 }

@@ -11,7 +11,13 @@ public class ErrorMessageWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel mainPanel;
-	
+
+	/**
+	 * Crée et ouvre une fenêtre d'erreur avec l'erreur renseignée en message.
+	 * @param fileName le fichier d'ou vient l'erreur
+	 * @param lineNumber la ligne ou se trouve l'erreur (ou -1 si non pertinent)
+	 * @param givenErrorMessage le message d'erreur à afficher
+	 */
 	public ErrorMessageWindow (String fileName, int lineNumber, String givenErrorMessage){
 		super("Error");
 		
@@ -24,8 +30,13 @@ public class ErrorMessageWindow extends JFrame {
 
 
 	}
-	
-	
+
+	/**
+	 * Crée l'interface de la fenêtre d'erreur
+	 * @param fileName
+	 * @param lineNumber
+	 * @param givenErrorMessage
+	 */
 	public void setupUI(String fileName, int lineNumber, String givenErrorMessage) {
 		
 		mainPanel = new JPanel();
@@ -59,7 +70,10 @@ public class ErrorMessageWindow extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
+	/**
+	 * Crée le bouton OK de confirmation qui ferme la fenêtre
+	 */
 	public void setupOKButton() {
 		
 		JPanel buttonPanel;
