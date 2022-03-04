@@ -17,7 +17,7 @@ public class SetDepartureButton extends JButton {
             public void actionPerformed(ActionEvent e) {
 
                 app.setMode("setDeparture");
-                app.repaintGrid();
+                app.repaint();
 
 
             }

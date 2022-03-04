@@ -1,21 +1,10 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.io.IOException;
+import dijkstra.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
-
-import javax.swing.JPanel;
-
-import dijkstra.ASet;
-import dijkstra.ASetInterface;
-import dijkstra.Dijkstra;
-import dijkstra.GraphInterface;
-import dijkstra.Pi;
-import dijkstra.Previous;
-import dijkstra.VertexInterface;
-import maze.MazeReadingException;
 
 public class DrawingGrid extends JPanel {
 
@@ -27,10 +16,12 @@ public class DrawingGrid extends JPanel {
     private CaseBox[][] grid;
     private ImageLoader imageLoader;
     private boolean DijkstraSuccessful;
+    private ColorMap colorMap = new ColorMap();
     private final ArrayList<CaseBox> pathCases = new ArrayList<>();
 
     /**
      * Draw the grid on the screen according to the data provided.
+     *
      * @param app the application JFrame.
      */
     public DrawingGrid(DrawingApp app) {
@@ -71,8 +62,6 @@ public class DrawingGrid extends JPanel {
                 this.add(grid[i][j]);
             }
         }
-
-
     }
 
 
@@ -83,40 +72,21 @@ public class DrawingGrid extends JPanel {
 
         Color arrivalColor = Color.RED;
         Color departureColor = Color.BLUE;
-        System.out.println("Il y a : " + rows + " lignes.");
-
+        Color emptyColor = Color.WHITE;
+        Color wallColor = Color.BLACK;
         app.getMaze().printMaze();
 
-        //todo : Gérer les exceptions avant d'afficher le new maze/changer le layout
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
+                char type = app.getMaze().maze[i][j].getType();
+
                 try {
+                    Color caseColor = colorMap.get(type);
+                    grid[i][j].setBackground(caseColor);
 
-                    switch (app.getMaze().maze[i][j].getType()) {
-
-                        case 'A':
-                            grid[i][j].setBackground(arrivalColor);
-                            break;
-
-                        case 'D':
-                            grid[i][j].setBackground(departureColor);
-                            break;
-
-                        case 'E':
-                            grid[i][j].setBackground(Color.WHITE);
-                            break;
-
-                        case 'W':
-                            grid[i][j].setBackground(Color.BLACK);
-                            break;
-
-                        default:
-                            throw new MazeReadingException(app.getMaze().getFileName(), i, "NotAMaze");
-                    }
-
-                } catch (MazeReadingException e) {
-                    e.errorWindow();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

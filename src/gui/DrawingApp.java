@@ -1,18 +1,12 @@
 package gui;
 
-import java.awt.Dimension;
+import maze.Maze;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.awt.BorderLayout;
-import java.util.Set;
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-
-import maze.Maze;
 
 
 public class DrawingApp extends JFrame {

@@ -17,7 +17,7 @@ public class SetArrivalButton extends JButton {
             public void actionPerformed(ActionEvent e) {
 
                 app.setMode("setArrival");
-                app.repaintGrid();
+                app.repaint();
 
 
             }
