@@ -24,11 +24,6 @@ public class Pi implements PiInterface {
 		pi.put(u, d);
 		
 	}
-
-	@Override
-	public VertexInterface getClosest(VertexInterface u) {
-		return null;
-	}
 	
 	@Override
 	public String toString() {

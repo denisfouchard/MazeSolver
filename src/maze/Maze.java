@@ -19,6 +19,7 @@ public class Maze implements GraphInterface {
 	private String fileName = null;
 	private int rows;
 	private int cols;
+	private boolean initiated = false;
 	
 	public Maze() {
 		
@@ -30,20 +31,24 @@ public class Maze implements GraphInterface {
 		cols  = j;
 		
 	}
-	
-	public Maze(int i, int j, MBox[] list_boxes) {
-		
-		//Pas utile, à supprimer
-		
-		maze = new MBox[i][j];
-		rows = i;
-		cols  = j;
-		for (MBox box : boxes) {
-			maze[box.getX()][box.getY()] = box;
-		}
+
+	/**
+	 * Affiche le labyrhinthe dans la console.
+	 */
+	public void printMaze()  {
+		for (int i = 0; i < rows; i++) {
+			String row = new String();
+			for (int j = 0; j < cols; j++) {
+					row += maze[i][j].getType();
+				}
+			}
 	}
-	
-	
+
+
+	/**
+	 * Crée un labyrinthe avec des cases vides et le départ à (0,0)
+	 * et l'arrivée en bas à droite
+	 */
 	public void initEmptyMaze() {
 		
 		departure = new DBox(0, 0);
@@ -59,10 +64,16 @@ public class Maze implements GraphInterface {
 		
 		maze[0][0] = departure;
 		maze[rows-1][cols-1] = arrival;
-	
+
+		initiated = true;
 		
 	}
-	
+
+	/**
+	 * Lit un labyrinthe à partir d'une fichier et l'affiche dans la console.
+	 * @param fileName le fichier labyrinthe
+	 * @throws IOException
+	 */
 	public final void printFromTextFile(String fileName) throws IOException {
 		try (BufferedReader m = new BufferedReader(new FileReader(fileName))) {
 			String strCurrentLine;
@@ -72,8 +83,14 @@ public class Maze implements GraphInterface {
 		}
 		
 	}
-	
-	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException {
+
+	/**
+	 * Crée un objet Maze à partir d'un fichier donné
+	 * @param fileName le fichier labyrinthe
+	 * @throws MazeReadingException
+	 * @throws IOException
+	 */
+	public final boolean initFromTextFile(String fileName) throws MazeReadingException, IOException {
 		
 		BufferedReader buff = new BufferedReader(new FileReader(fileName));
 		ArrayList<String> fileLines = new ArrayList<>();
@@ -84,28 +101,25 @@ public class Maze implements GraphInterface {
 		while ((strCurrentLine = buff.readLine()) != null) {
 			fileLines.add(strCurrentLine);
 		}
+
+		rows = fileLines.size();
+		cols  = fileLines.get(0).length();
+
 		
-		int n = fileLines.size();	
-		int m = fileLines.get(0).length();
-		
-		rows = n;
-		cols  = m;
-		
-		size = n*m;
-		
-		maze = new MBox[n][m];
+		maze = new MBox[rows][cols];
+
 		char Box;
 		String currentLine;
 		
-		for (int i = 0; i < n; i+=1) {
+		for (int i = 0; i < rows; i+=1) {
 			try {
 				currentLine = fileLines.get(i);
 				
-				if (currentLine.length() != m) {
-					throw new MazeReadingException(fileName, i, "NotAMaze");
+				if (currentLine.length() != cols) {
+					throw new MazeReadingException(fileName, i, "Invalid row length");
 					} 
 				
-				for (int j = 0; j < m; j+=1) {
+				for (int j = 0; j < cols; j+=1) {
 					Box = currentLine.charAt(j);
 					
 					
@@ -135,12 +149,28 @@ public class Maze implements GraphInterface {
 
 			} catch (MazeReadingException e) {
 				// Affiche une fenêtre d'erreur avec le nom de la ligne
-				e.printStackTrace();
+				e.errorWindow();
+				return false;
 			}
 		}
 		buff.close();
+		try {
+			if (arrival == null || departure == null){
+				throw new MazeReadingException(fileName, -1, "Il manque l'arrivée et/ou le départ");
+			}
+		} catch (MazeReadingException daex){
+			daex.errorWindow();
+			return false;
+		}
+		return true;
+
 	}
-	
+
+	/**
+	 * Sauvegarde le labyrinthe courant dans une fichier texte
+	 * @param fileName le fichier texte. Il peut être crée s'il n'exite pas déja
+	 * @throws FileNotFoundException
+	 */
 	public final void saveToTextFile(String fileName) throws FileNotFoundException {
 		PrintWriter file = new PrintWriter(new File(fileName));
 		int n = maze.length;
@@ -159,16 +189,26 @@ public class Maze implements GraphInterface {
 		return departure;
 	}
 
-	public void setDeparture(DBox departure) {
-		this.departure = departure;
+	public void setDeparture(int x, int y) {
+		DBox newDeparture = new DBox(x, y);
+		this.maze[x][y] = newDeparture;
+		int departureX = departure.getX();
+		int departureY = departure.getY();
+		this.maze[departureX][departureY] = new EBox(departureX, departureY);
+		this.departure = newDeparture;
 	}
 
 	public ABox getArrival() {
 		return arrival;
 	}
 
-	public void setArrival(ABox arrival) {
-		this.arrival = arrival;
+	public void setArrival(int x, int y) {
+		ABox newArrival = new ABox(x, y);
+		this.maze[x][y] = newArrival;
+		int arrivalX = arrival.getX();
+		int arrivalY = arrival.getY();
+		this.maze[arrivalX][arrivalY] = new EBox(arrivalX, arrivalY);
+		this.arrival = newArrival;
 	}
 
 
@@ -186,6 +226,11 @@ public class Maze implements GraphInterface {
 		return allVertices;
 	}
 
+	/**
+	 * Renvoie la liste des sommets voisins du sommet donné
+	 * @param vertex le sommet
+	 * @return la liste des voisins
+	 */
 	@Override
 	public ArrayList<VertexInterface> getSuccessors(VertexInterface vertex) {
 		//MBox v = (MBox)vertex;
@@ -235,6 +280,10 @@ public class Maze implements GraphInterface {
 	
 	public String getFileName() {
 		return fileName;
+	}
+
+	public boolean isInitiated(){
+		return initiated;
 	}
 
 }

@@ -20,23 +20,16 @@ public class ComputeButton extends JButton{
 
 	public ComputeButton(DrawingApp app) {
 		super("Compute...");
-
-		
-		//setMnemonic(KeyEvent.VK_C);
-		
-		
 		// Bouton de calcul du plus court chemin
 		this.setBounds(50, 100, 95, 30);
-		
-		
-		
 		this.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				app.computePath();
+
 				app.repaintGrid();
+				app.computePath();
 				
 			}
 			

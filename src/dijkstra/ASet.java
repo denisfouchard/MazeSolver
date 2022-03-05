@@ -2,9 +2,6 @@ package dijkstra;
 import java.util.HashSet;
 
 public class ASet implements ASetInterface{
-	
-	
-	
 	private HashSet<VertexInterface> A; 
 	
 	public ASet(GraphInterface g) {
@@ -14,7 +11,6 @@ public class ASet implements ASetInterface{
 	@Override
 	public void addA(VertexInterface u) {
 		A.add(u);
-		
 	}
 
 	@Override

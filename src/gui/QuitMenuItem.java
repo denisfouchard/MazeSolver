@@ -15,17 +15,11 @@ public class QuitMenuItem extends JMenuItem{
 	public QuitMenuItem(DrawingApp drawingApp) {
 		super("Quit");
 		this.drawingApp = drawingApp;
-		
 		setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
-		
-		
 		this.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				System.exit(0);
-				
 			}
 			
 		});

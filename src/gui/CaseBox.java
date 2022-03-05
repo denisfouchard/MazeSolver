@@ -21,14 +21,13 @@ public class CaseBox extends Box implements MouseListener {
 	private DrawingApp app;
 	
 	/**
-	 * 
+	 * @author Denis Fouchard
 	 */
 	private static final long serialVersionUID = 1L;
 
 
 	public CaseBox(DrawingApp app, ImageLoader imLoader, Maze maze, int x, int y) {
 		super(BoxLayout.X_AXIS);
-
 		this.maze = maze;
 		this.app = app;
 		this.x = x;
@@ -37,42 +36,49 @@ public class CaseBox extends Box implements MouseListener {
 		setOpaque(true);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		addMouseListener(this);
-
 		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-
-	
+		//Ne fait rien
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
-		
+		// Ne fait rien
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		//System.out.println("Current type " +maze.maze[x][y].getType() );
-		switch (maze.maze[x][y].getType()) {
-			case 'E':
-				maze.maze[x][y].setType('W');
-				break;
-			case 'W':
+
+		if (app.getMode() == "setDeparture"){
+			maze.setDeparture(x,y);
+			setBackground(Color.BLUE);
+			app.resetMode();
+		} else if (app.getMode() == "setArrival"){
+			maze.setArrival(x,y);
+			setBackground(Color.RED);
+			app.resetMode();
+		} else {
+			if (maze.maze[x][y].getType() == 'W'){
 				maze.maze[x][y].setType('E');
-				break;
-			default:
+				setBackground(Color.WHITE);
+
+			} else if (maze.maze[x][y].getType() == 'E'){
+				maze.maze[x][y].setType('W');
+				setBackground(Color.BLACK);
+			}
 
 		}
-		//System.out.println("Changed type " +maze.maze[x][y].getType() );
 
+
+		app.repaintGrid();
 
 		if (app.getAutoComputeStatus() == 1) {
 			app.computePath();
 		}
-		app.repaintGrid();
+
+		repaint();
 
 		
 	}

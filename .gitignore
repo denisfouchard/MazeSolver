@@ -5,5 +5,5 @@
 .project
 *.log
 .iml
-.gitignore
 out
+META-INF

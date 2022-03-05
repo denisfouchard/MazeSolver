@@ -15,9 +15,7 @@ public class DrawingMenuBar extends JMenuBar{
 
 	public DrawingMenuBar(DrawingApp drawingApp)  {
 		super();
-		
 		// Ajouter des menus
-		
 		add(new FileMenu(drawingApp));
 	}
 }
