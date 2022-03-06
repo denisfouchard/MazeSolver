@@ -9,7 +9,6 @@ import dijkstra.VertexInterface;
 import gui.DrawingApp;
 import dijkstra.Dijkstra;
 import dijkstra.GraphInterface;
-import maze.ErrorMessageWindow;
 import maze.Maze;
 import maze.MazeReadingException;
 

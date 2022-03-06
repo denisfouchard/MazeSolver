@@ -14,23 +14,20 @@ public class Maze implements GraphInterface {
 	public MBox[][] maze;
 	private DBox departure;
 	private ABox arrival;
-	private MBox[] boxes;
-	private int size;
 	private String fileName = null;
 	private int rows;
 	private int cols;
-	private boolean initiated = false;
-	
-	public Maze() {
-		
+	private int size;
+
+	public Maze(){
 	}
-	
+
 	public Maze(int i, int j) {
 		maze = new MBox[i][j];
 		rows = i;
 		cols  = j;
-		
 	}
+
 
 	/**
 	 * Affiche le labyrhinthe dans la console.
@@ -64,8 +61,6 @@ public class Maze implements GraphInterface {
 		
 		maze[0][0] = departure;
 		maze[rows-1][cols-1] = arrival;
-
-		initiated = true;
 		
 	}
 
@@ -154,10 +149,10 @@ public class Maze implements GraphInterface {
 		buff.close();
 		try {
 			if (arrival == null || departure == null){
-				throw new MazeReadingException(fileName, -1, "Il manque l'arrivée et/ou le départ");
+				throw new MazeReadingException(fileName, -1, "Arrival or departure is missing.");
 			}
-		} catch (MazeReadingException daex){
-			daex.errorWindow();
+		} catch (MazeReadingException missingException){
+			missingException.errorWindow();
 			return false;
 		}
 		return true;
@@ -210,6 +205,10 @@ public class Maze implements GraphInterface {
 	}
 
 
+	@Override
+	public int size() {
+		return size;
+	}
 
 	@Override
 	public ArrayList<VertexInterface> getAllVertices() {
@@ -262,25 +261,12 @@ public class Maze implements GraphInterface {
 		return successors;
 	}
 
-	@Override
-	public int size() {
-		return size;
-	}
-
 	public int getRows() {
 		return rows;
 	}
 
 	public int getCols() {
 		return cols;
-	}
-	
-	public String getFileName() {
-		return fileName;
-	}
-
-	public boolean isInitiated(){
-		return initiated;
 	}
 
 }

@@ -12,8 +12,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import maze.ErrorMessageWindow;
-
 public class SaveMenuItem extends JMenuItem{
 	/**
 	 * 

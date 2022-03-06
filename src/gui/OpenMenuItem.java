@@ -5,14 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import maze.ErrorMessageWindow;
 import maze.Maze;
 import maze.MazeReadingException;
 

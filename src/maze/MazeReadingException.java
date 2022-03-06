@@ -1,6 +1,8 @@
 package maze;
 
 
+import gui.ErrorMessageWindow;
+
 public class MazeReadingException extends Exception{
 	
 	/**
