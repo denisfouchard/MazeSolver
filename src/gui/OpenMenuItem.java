@@ -46,23 +46,16 @@ public class OpenMenuItem extends JMenuItem{
 
 					Maze newMaze = new Maze();
 
-
 					try {
-
 						initiated = newMaze.initFromTextFile(selectedFile.getCanonicalPath());
 
-
 					} catch (MazeReadingException e1) {
-
 						e1.errorWindow();
-
-
 
 					} catch (Exception exception) {
 						//Dans le cas ou c'est une autre erreur, une fenêtre d'erreur générique s'ouvre
 						new ErrorMessageWindow(null, -1, "Task failed");
 						exception.printStackTrace();
-
 					}
 
 					if (initiated){
@@ -73,14 +66,9 @@ public class OpenMenuItem extends JMenuItem{
 							ex.printStackTrace();
 						}
 					}
-
-
 				}
 				
-				//A partir du chemin du fichier récuperé, on génère un nouveau objet (Maze)newMaze
-				
 
-				
 			}
 			
 			

@@ -121,8 +121,6 @@ public class Maze implements GraphInterface {
 				
 				for (int j = 0; j < cols; j+=1) {
 					Box = currentLine.charAt(j);
-					
-					
 					switch(Box) {
 					case 'A':
 						arrival = new ABox(i, j);
@@ -256,7 +254,6 @@ public class Maze implements GraphInterface {
 				successors.add(maze[x][y-1]);
 			}
 		}
-		
 		if (y < m-1) {
 			if (maze[x][y+1].getType() != 'W') {
 				successors.add(maze[x][y+1]);

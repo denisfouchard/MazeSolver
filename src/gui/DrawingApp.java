@@ -59,14 +59,16 @@ public class DrawingApp extends JFrame {
         ComputeButton compute = new ComputeButton(this);
         SetDepartureButton setDepartureButton = new SetDepartureButton(this);
         SetArrivalButton setArrivalButton = new SetArrivalButton(this);
+
+        // Paramétrage des boutons
         buttonPanel = new JPanel();
         buttonPanel.add(compute, BorderLayout.SOUTH);
         buttonPanel.add(setDepartureButton, BorderLayout.EAST);
         buttonPanel.add(setArrivalButton, BorderLayout.EAST);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
+        // Paramétrage de la check-box Auto-Compute
         JCheckBox autoCompute = new JCheckBox("Auto-compute");
-
         autoCompute.addActionListener(new ActionListener() {
 
             @Override
@@ -76,6 +78,7 @@ public class DrawingApp extends JFrame {
 
             }
         });
+
         buttonPanel.add(autoCompute);
         mainPanel.add(buttonPanel);
     }

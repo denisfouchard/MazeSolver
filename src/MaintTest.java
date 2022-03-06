@@ -14,7 +14,12 @@ import maze.Maze;
 import maze.MazeReadingException;
 
 public class MaintTest {
-
+	/**
+	 * Fonction de test des méthodes
+	 * @param args
+	 * @throws IOException
+	 * @throws MazeReadingException
+	 */
 	public static void main(String[] args) throws IOException, MazeReadingException {
 		Maze m = new Maze();
 		//m.initFromTextFile("data/labyrinthe.txt");
@@ -31,26 +36,10 @@ public class MaintTest {
 		Previous prev = new Previous(m);
 		Pi pi = new Pi(m);
 		prev = (Previous) Dijkstra.dijkstra(g, dep, a, pi, prev);
-		
-		//System.out.println(pi.toString());
-		
-		//System.out.println(prev.toString());
-		
-//		String res = "";
-//		
-//		VertexInterface r = arr;
-//		while (r.getType() != 'D') {
-//			System.out.println(r.toString());
-//			res = res + r.toString();
-//			r = prev.getPrevious(r);
-//			
-//		}
-//		
-//		System.out.print(res);
-		
+
 
 		new DrawingApp(m);
-		//new ErrorMessageWindow("test", -1);
+
 		
 		
 		

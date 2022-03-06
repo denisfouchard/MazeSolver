@@ -69,14 +69,7 @@ public class DrawingGrid extends JPanel {
      * Update and refresh the grid layout with the new information stored.
      */
     public void repaintGrid() {
-
-        Color arrivalColor = Color.RED;
-        Color departureColor = Color.BLUE;
-        Color emptyColor = Color.WHITE;
-        Color wallColor = Color.BLACK;
-        app.getMaze().printMaze();
-
-
+        //pp.getMaze().printMaze();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 char type = app.getMaze().maze[i][j].getType();
@@ -101,11 +94,9 @@ public class DrawingGrid extends JPanel {
      */
 
     public void computePath() {
-
-
-        GraphInterface g = (GraphInterface) app.getMaze();
-        VertexInterface dep = (VertexInterface) app.getMaze().getDeparture();
-        VertexInterface arr = (VertexInterface) app.getMaze().getArrival();
+        GraphInterface g = app.getMaze();
+        VertexInterface dep = app.getMaze().getDeparture();
+        VertexInterface arr = app.getMaze().getArrival();
 
         //On exécute Dijkstra pour récuperer le chemin
         ASetInterface a = new ASet(g);
@@ -125,12 +116,8 @@ public class DrawingGrid extends JPanel {
             v = prev.getPrevious(v);
 
         }
-
         //On ne colorie les cases que si Dijkstra a réussi
         DijkstraSuccessful = (v == dep);
-
-
-
         if (DijkstraSuccessful) {
             for (CaseBox pathCase : pathCases) {
                 pathCase.setBackground(Color.GREEN);
