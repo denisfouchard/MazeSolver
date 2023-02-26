@@ -1,13 +1,16 @@
-## README 
+# README 
+Projet JAVA de première annéd à Télécom Paris (INF103 - Programmation Orientée Objet).
 
-Voici mon projet Labyrinthe. 
+Voici mon projet Labyrinthe. Il s'agit d'un projet de programmation pour se familiariser avec la POO, 
+d'ou la présences de d'interfaces et de certaines classes qui ne sont pas des choix de programmation naturels.
+
 - **Le projet fonctionnel final se trouve sur la branche _master_.**
 - Sur la branche _test_ se trouve des tests d'implémentations pas nécessairement fonctionnels, avec des bugs, et
 pas forcément très lisible.
 - Sur la branche _boxgrid_ se trouve le code du Labyrinthe avec implémentation par Box, même implémentation que sur master mais avec potentiellement 
 quelques ajouts qui n'ont pas été merge sur la branche master car non foncitonnels.
 
-### Structure du projet
+## Structure du projet
 
 Le projet se divise en deux dossiers principaux, *src* et *data*.
 - Dans src se trouve tout le code source du projet
