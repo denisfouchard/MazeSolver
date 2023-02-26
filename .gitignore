@@ -5,7 +5,9 @@
 .project
 *.log
 *.iml
-out
+*.jar
+*.class
+out/
 META-INF
 TODO.md
 .vscode
